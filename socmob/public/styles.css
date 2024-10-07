@@ -79,6 +79,47 @@ main {
     font-size: 18px; 
 }
 
+.search-container {
+    margin-top: 50px;
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+
+.search-wrapper {
+    display: flex; 
+    align-items: center; 
+}
+
+.search-bar {
+    width: 330px; 
+    padding: 10px; 
+    border: 0.5px solid #ccc; 
+    border-radius: 17px 0 0 17px; 
+    font-size: 14px; 
+    outline: none; 
+    margin-bottom: 30px;
+    height: 40px;
+
+}
+
+.search-bar:focus {
+    border-color: #000000; 
+}
+
+.search-button {
+    padding: 10px 20px; 
+    background-color: #16498C; 
+    color: #fff; 
+    border: none;
+    border-radius: 0 17px 17px 0; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-bottom: 30px;
+    height: 60px;
+
+}
+
 .feed-title {
     color: #16498C;
     font-size: 27px;
