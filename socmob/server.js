@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const path = require('path');
+const { scrapeReutersFactCheck } = require('./newsScraper');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,6 +10,7 @@ const port = process.env.PORT || 3000;
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,11 +21,11 @@ let likedNews = [];
 // Home page route (web-scraped news)
 app.get('/', async (req, res) => {
   try {
-    const scrapedNews = await scrapeNews();
-    res.render('home', { news: scrapedNews, likedNews });
+    const news = await scrapeReutersFactCheck();
+    res.render('home', { news, likedNews });
   } catch (error) {
-    console.error('Error fetching scraped news:', error);
-    res.status(500).send('Error fetching news');
+    console.error('Error fetching news:', error);
+    res.render('home', { news: [], likedNews });
   }
 });
 
