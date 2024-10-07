@@ -4,33 +4,23 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    padding-bottom: 60px; /* Add padding to accommodate the bottom nav */
 }
 
 header {
-    background-color: #333;
+    background-color: #5ea4e6;
     color: #fff;
     text-align: center;
     padding: 1rem;
 }
 
-nav {
-    margin-top: 1rem;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
-}
-
-nav a.active {
-    background-color: #555;
-    border-radius: 5px;
-}
-
 main {
     padding: 2rem;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 1rem;
 }
 
 .news-container {
@@ -41,13 +31,52 @@ main {
 
 .news-item {
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+}
+
+.news-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-content {
     padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.news-content p {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
 }
 
 .like-btn {
-    background-color: #4CAF50;
+    background-color: #1e88e5;
     border: none;
     color: white;
     padding: 0.5rem 1rem;
@@ -55,11 +84,85 @@ main {
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
-    margin-top: 1rem;
     cursor: pointer;
     border-radius: 5px;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+.like-btn:hover {
+    background-color: #1565c0;
 }
 
 .like-btn.liked {
     background-color: #f44336;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #5ea4e6;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.bottom-nav a:hover {
+    background-color: #1976d2;
+}
+
+.bottom-nav a.active {
+    background-color: #1565c0;
+}
+
+.nav-icon {
+    /* font-size: 2rem; */
+    margin-bottom: 0.25rem;
+}
+
+.bottom-nav span {
+    font-size: 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .news-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-bottom: 70px; /* Increase padding for smaller screens */
+    }
+
+    .bottom-nav {
+        flex-wrap: wrap;
+    }
+
+    .bottom-nav a {
+        padding: 0.25rem;
+    }
+
+    /* .nav-icon {
+        font-size: 2rem;
+    } */
+
+    .bottom-nav span {
+        font-size: 0.7rem;
+    }
 }
