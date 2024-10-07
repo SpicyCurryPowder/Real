@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REAL. - Sources</title>
+    <title>REAL . - Sources</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <header>
-        <h1>REAL. </h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/verified-news">Verified News</a>
-            <a href="/liked-news" class="active">Sources</a>
-        </nav>
+        <h1>REAL .</h1>
     </header>
     <main>
-        <h2>Liked News</h2>
+        <h2>Sources</h2>
         <div class="news-container">
             <% likedNews.forEach(item => { %>
                 <div class="news-item">
@@ -30,6 +25,11 @@
             <% }); %>
         </div>
     </main>
+    <nav class="bottom-nav">
+        <a href="/">Home</a>
+        <a href="/verified-news">Verified News</a>
+        <a href="/source-news" class="active">Sources</a>
+    </nav>
     <script src="/script.js"></script>
 </body>
 </html>
