@@ -3,32 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REAL. - Home</title>
+    <title>REAL . - Home</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <header>
-        <h1>REAL. </h1>
-        <nav>
-            <a href="/" class="active">Home</a>
-            <a href="/verified-news">Verified News</a>
-            <a href="/liked-news">Sources</a>
-        </nav>
+        <h1>REAL .</h1>
     </header>
     <main>
-        <h2>Web-scraped News</h2>
+        <h2>Live Fact Checked News</h2>
         <div class="news-container">
-            <% news.forEach(item => { %>
-                <div class="news-item">
-                    <h3><%= item.title %></h3>
-                    <p><%= item.description %></p>
-                    <button onclick="toggleLike('<%= item.id %>', '<%= item.title %>', '<%= item.description %>', '<%= item.source %>')" class="like-btn <%= likedNews.some(liked => liked.id === item.id) ? 'liked' : '' %>">
-                        <%= likedNews.some(liked => liked.id === item.id) ? 'Unlike' : 'Like' %>
-                    </button>
-                </div>
-            <% }); %>
+            <% for(let i = 1; i <= 6; i++) { %>
+                <article class="news-item">
+                    <div class="news-image">
+                        <img src="https://picsum.photos/seed/<%= i %>/400/200" alt="Sample Article Image <%= i %>">
+                    </div>
+                    <div class="news-content">
+                        <h3>Lorem Ipsum Dolor Sit Amet <%= i %></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <button onclick="toggleLike('sample-<%= i %>', 'Lorem Ipsum Dolor Sit Amet <%= i %>', 'Lorem ipsum dolor sit amet...', 'Sample')" class="like-btn">
+                            Verify
+                        </button>
+                    </div>
+                </article>
+            <% } %>
         </div>
     </main>
+    <nav class="bottom-nav">
+        <a href="/" class="active">
+            <div class="nav-icon">🏘️</div>
+            <span>Home</span>
+        </a>
+        <a href="/verified-news">
+            <div class="nav-icon">✅</div>
+            <span>Verified News</span>
+        </a>
+    </nav>
     <script src="/script.js"></script>
 </body>
 </html>
