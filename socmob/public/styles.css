@@ -274,9 +274,10 @@ main {
 }
 
 .like-btn {
-    background-color: #1e88e5;
+    background-color: #ffffff;
     border: none;
-    color: white;
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
     padding: 0.5rem 1rem;
     text-align: center;
     text-decoration: none;
@@ -284,12 +285,16 @@ main {
     font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
-    align-self: flex-start;
+    align-self: flex-end;
     transition: background-color 0.3s ease;
+    
 }
 
 .like-btn:hover {
-    background-color: #1565c0;
+    background-color: #16498C;
+    color: white;
+    border:  black;
+
 }
 
 .like-btn.liked {
@@ -323,14 +328,19 @@ main {
     background-color: #1976d2;
 }
 
-.bottom-nav a.active {
-    background-color: #1565c0;
+
+.nav-icon img {
+    width: auto;
+    height: 30px;
+    margin-top: 6px;
 }
 
-.nav-icon {
-    /* font-size: 2rem; */
-    margin-bottom: 0.25rem;
+.nav-icon-verified img{
+    width: auto;
+    height: 30px;
+    margin-top: 6px;
 }
+
 
 .bottom-nav span {
     font-size: 0.8rem;
