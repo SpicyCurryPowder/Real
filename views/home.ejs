@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REAL. - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Example link -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="logo">Real
+            <img src="/images/green_circle.png">
+        </h1>
+        <div class="settings">
+            <img src="/images/settings.png">
+        </div>
+
+    </header>
+    <main>
+        <h1 class="hello">Hello John!</h1>
+        <h1 class="location">Your current location</h1>
+        <h1 class="address"><img src="/images/Vector.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <button class="add-news-button">+ Add News</button>
+        <h1 class="trending-title">Trending updates in your area</h1>
+        <div class="scroll-container"> <!-- Scrollable container -->
+            <% for(let i=1; i <=6; i++) { %>
+                <article class="news-card"> <!-- Individual card -->
+                    <div class="small-images">
+                        <img src="/images/koala.jpg">
+                    </div>
+                    <div class="ribbon <%= i === 1 ? 'verified' : i === 2 ? 'unverified' : 'fake' %>">
+                        <%= i===1 ? 'Verified' : i===2 ? 'Unverified' : 'Fake' %>
+                    </div>
+                    <div class="news-content">
+                        <h3 class="heading">Lorem Ipsum Dolor Sit Amet <%= i %>
+                        </h3>
+                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h1 class="address-small"><img src="/images/Vector.png" alt="">Albert St Brisbane City, QLD 4000
+                        </h1>
+                    </div>
+                </article>
+                <% } %>
+        </div>
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input type="text" class="search-bar" placeholder="Search news near your location...">
+                <button class="search-button">Search</button>
+            </div>
+        </div>
+        <h1 class="feed-title">Feed</h1>
+        <div class="news-container">
+            <% for(let i=1; i <=6; i++) { %>
+                <article class="news-item">
+                    <div class="news-image">
+                        <img src="https://picsum.photos/seed/<%= i %>/400/200" alt="Sample Article Image <%= i %>">
+                    </div>
+                    <div class="news-content">
+                        <h3>Lorem Ipsum Dolor Sit Amet <%= i %>
+                        </h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <button
+                            onclick="toggleLike('sample-<%= i %>', 'Lorem Ipsum Dolor Sit Amet <%= i %>', 'Lorem ipsum dolor sit amet...', 'Sample')"
+                            class="verify-btn">
+                            Verify
+                        </button>
+                    </div>
+                </article>
+                <% } %>
+        </div>
+    </main>
+    <nav class="bottom-nav">
+        <a href="/" class="active">
+            <div class="nav-icon"><img src="/images/Home.png" alt=""></div>
+            <span>Home</span>
+        </a>
+        <a href="/verified-news">
+            <div class="nav-icon-verified"><img src="/images/verified.png" alt=""></div>
+            <span>Verified News</span>
+        </a>
+    </nav>
+    </nav>
+    <script src="/script.js"></script>
+</body>
+
+</html>

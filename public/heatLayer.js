@@ -22,16 +22,29 @@
 
 
 var addressPoints = [
-    [-27.4977, 153.0129],
-    [-27.48552, 152.993492],
-    [-27.48552, 152.9934918],
-    [-27.4855223, 152.9934916],
-    [-27.4855218, 152.9934914],
-    [-27.485516, 152.9934922],
-    [-27.485518, 152.9934923],
-    [-27.48552, 152.9934933],
-    [-27.4705, 153.026],
-    [-27.4705, 153.0255],
+    [-27.49626, 153.01302], // uq
+    [-27.496265, 153.0131], // uq
+    [-27.496262, 153.01303], // uq
+
+    [-27.4854, 152.993], // toowong train station
+
+    [-27.486, 152.95], // mount coot tha
+
+    [-27.484, 153.026],  // queensland children hospital
+
+    [-27.47043, 153.0255], // uptown brisbane
+    [-27.47052, 153.02549], // uptown brisbane
+    [-27.47052, 153.0254], // uptown brisbane
+    [-27.4705, 153.0255], // uptown brisbane
+    [-27.47042, 153.0257], // uptown brisbane
+    [-27.47041, 153.0259], // uptown brisbane
+    [-27.47042, 153.0254], // uptown brisbane
+    [-27.4704, 153.026], // uptown brisbane, that one pin further right
+
+    [-27.4712, 153.02542], // elizabeth house
+    [-27.4713, 153.02532], // elizabeth house
+    [-27.47132, 153.02545], // elizabeth house
+    [-27.4718, 153.02531], // elizabeth house
 ]
 
 var markers = L.markerClusterGroup();
@@ -40,6 +53,8 @@ for (var i = 0; i < addressPoints.length; i++) {
     var a = addressPoints[i];
     var marker = L.marker(new L.LatLng(a[0], a[1]));
     markers.addLayer(marker);
+    // markers.bindPopup('Location: Brisbane CBD<br> News Title: New Uncle Roger restaurant opening')
+    // markers.openPopup();
 }
 
 map.addLayer(markers);

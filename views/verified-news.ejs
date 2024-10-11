@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REAL . - Verified News</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>REAL .</h1>
+    </header>
+    <main>
+        <h2>Verified News</h2>
+        <div class="news-container">
+            <% for(let i=1; i <=6; i++) { %>
+                <article class="news-item">
+                    <div class="news-image">
+                        <img src="https://picsum.photos/seed/<%= i + 10 %>/400/200" alt="Sample Article Image <%= i %>">
+                    </div>
+                    <div class="news-content">
+                        <h3>Verified Lorem Ipsum <%= i %>
+                        </h3>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            mollit anim id est laborum.</p>
+                        <button
+                            onclick="toggleLike('verified-<%= i %>', 'Verified Lorem Ipsum <%= i %>', 'Duis aute irure dolor...', 'API')"
+                            class="like-btn">
+                            Like
+                        </button>
+                    </div>
+                </article>
+                <% } %>
+        </div>
+    </main>
+    <nav class="bottom-nav">
+        <a href="/">
+            <div class="nav-icon">🏘️</div>
+            <span>Home</span>
+        </a>
+        <a href="/verified-news" class="active">
+            <div class="nav-icon">✅</div>
+            <span>Verified News</span>
+        </a>
+    </nav>
+    <script src="/script.js"></script>
+</body>
+
+</html>
