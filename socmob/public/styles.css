@@ -27,6 +27,7 @@ main {
     font-size: 35px;
 }
 
+
 .logo img {
     width: 10px; 
     height: auto;
@@ -80,10 +81,9 @@ main {
 }
 
 .search-container {
-    margin-top: 50px;
     display: flex; 
     justify-content: center; 
-    margin-bottom: 20px; 
+    margin-top: 20px;
 }
 
 .search-wrapper {
@@ -92,16 +92,30 @@ main {
 }
 
 .search-bar {
-    width: 330px; 
+    width: 360px; 
+    padding: 10px ;
     padding: 10px; 
     border: 0.5px solid #ccc; 
     border-radius: 17px 0 0 17px; 
     font-size: 14px; 
     outline: none; 
     margin-bottom: 30px;
-    height: 40px;
+    height: 30px;
+    margin-top: 0px;
+    text-align:center
 
 }
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 16px;
+    color: #888;
+    pointer-events: none;
+    margin-bottom: 30px;
+    margin-left: 55px;
+}
+
 
 .search-bar:focus {
     border-color: #000000; 
@@ -109,16 +123,24 @@ main {
 
 .search-button {
     padding: 10px 20px; 
-    background-color: #16498C; 
-    color: #fff; 
-    border: none;
+    background-color: #ffffff; 
+    color: #5f5f5f; 
     border-radius: 0 17px 17px 0; 
     cursor: pointer; 
     font-size: 16px; 
     margin-bottom: 30px;
-    height: 60px;
+    border: 0.5px solid #aeaeae; 
+    height: 50px;
 
 }
+
+.search-button:hover {
+    background-color: #16498C;
+    color: white;
+    border:  black;
+
+}
+
 
 .feed-title {
     color: #16498C;
@@ -240,6 +262,52 @@ main {
     transform: translateY(-5px);
 }
 
+.news-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px; 
+    padding-top: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight:normal
+}
+
+.dot {
+    margin: 0 9px;
+}
+
+.time {
+    color: #000000;
+    margin-right: 5px;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+.news-status {
+    font-size: 12px;
+    color: #000000;
+    font-weight: lighter;
+
+}
+
 .news-image {
     width: 100%;
     height: 200px;
@@ -300,6 +368,33 @@ main {
 .like-btn.liked {
     background-color: #f44336;
 }
+
+.verify-btn{
+    background-color: #ffffff;
+    border: none;
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    align-self: flex-end;
+    transition: background-color 0.3s ease;
+}
+
+.verify-btn:hover{
+    background-color: #16498C;
+    color: white;
+    border:  black;
+}
+
+.verify-btn.liked {
+    background-color: #f44336;
+}
+
 
 .bottom-nav {
     position: fixed;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REAL. - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Example link -->
     <link rel="stylesheet" href="/styles.css">
 </head>
@@ -17,6 +18,13 @@
         </div>
  
     </header>
+    <div class="search-container">
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-bar" placeholder="Search news near your location...">
+            <button class="search-button">Search</button>
+        </div>
+    </div>
     <main>
         <h1 class="hello">Hello John!</h1>
         <h1 class="location">Your current location</h1>
@@ -40,16 +48,45 @@
                 </article>
             <% } %>
         </div>
-        <div class="search-container">
-            <div class="search-wrapper">
-                <input type="text" class="search-bar" placeholder="Search news near your location...">
-                <button class="search-button">Search</button>
-            </div>
-        </div>
-        <h1 class="feed-title">Feed</h1>
+        <h1 class="feed-title">News feed</h1>
         <div class="news-container">
-            <% for(let i = 1; i <= 6; i++) { %>
+            <% 
+            // Array of profile image URLs
+            const profileImages = [
+                "/images/profile-1.jpg",
+                "/images/profile-2.jpg",
+                "/images/profile-3.jpg",
+                "/images/profile-4.png",
+                "/images/profile-5.png",
+                "/images/profile-3.jpg",
+            ];
+
+            const userNames = [
+            "Alice Johnson", "Bob Smith", "Charlie Adams", 
+            "Dana Lee", "Evelyn Harris", "Frank Moore"
+            ];
+            
+            const times = ["1h ago", "2h ago", "3h ago", "4h ago", "5h ago", "6h ago"];
+            %>
+        
+            <% for(let i = 1; i <= 6; i++) { 
+                const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+                const randomName = userNames[i % userNames.length];
+                const randomTime = times[i % times.length];  
+            %>
+                
                 <article class="news-item">
+                    <div class="news-top">
+                        <div class="profile-pic">
+                            <img src="<%= randomImage %>" alt="User Profile Picture <%= i %>">
+                        </div>
+                        <span class="user-name"><%= randomName %></span>
+                        <span class="dot">•</span>
+                        <span class="time"><%= randomTime %></span>
+                        <span class="dot">•</span>
+                        <span class="news-status">News popular near you</span>
+                    </div>
+
                     <div class="news-image">
                         <img src="https://picsum.photos/seed/<%= i %>/400/200" alt="Sample Article Image <%= i %>">
                     </div>
