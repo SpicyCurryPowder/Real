@@ -16,10 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // In-memory storage for liked news (replace with a database in a real application)
 let likedNews = [];
 const newsList = [
-    { title: 'Breaking News: New Tech Revolution!', content: 'A major breakthrough in artificial intelligence is set to change the world as we know it.' },
-    { title: 'Sports Update: Soccer World Cup 2024', content: 'The World Cup is heating up, with new teams making surprising advances.' },
-    { title: 'Weather Alert: Hurricane Approaching', content: 'A powerful storm is set to hit the east coast. Preparations are underway.' },
-    { title: 'Health News: New Vaccine Approved', content: 'A new vaccine has been approved for public use, offering protection against the latest strain of the flu.' }
+    { author: 'Bob Smith', time: '2 min ago', imgSrc: 'images/profile-1.jpg', title: 'Breaking News: New Tech Revolution!', content: 'A major breakthrough in artificial intelligence is set to change the world as we know it.' },
+    { author: 'Evelyn Harris', time: '12 min ago', imgSrc: 'images/profile-4.png', title: 'Sports Update: Soccer World Cup 2024', content: 'The World Cup is heating up, with new teams making surprising advances.' },
+    { author: 'Dana Lee', time: '1h ago', imgSrc: 'images/profile-3.jpg', title: 'Weather Alert: Hurricane Approaching', content: 'A powerful storm is set to hit the east coast. Preparations are underway.' },
+    { author: 'Alice Johnson', time: '2h ago', imgSrc: 'images/profile-2.jpg', title: 'Health News: New Vaccine Approved', content: 'A new vaccine has been approved for public use, offering protection against the latest strain of the flu.' }
 ];
 
 // Home page route (web-scraped news)

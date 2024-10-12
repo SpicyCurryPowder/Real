@@ -32,15 +32,36 @@
 
 
     <div class="news-container">
-        <% newsList.forEach(function(newsItem) { %>
-            <div class="news-post">
-                <h2>
-                    <%= newsItem.title %>
-                </h2>
-                <p>
-                    <%= newsItem.content %>
-                </p>
-            </div>
+        <% newsList.forEach(function(newsItem) { 
+        %>
+            <article class="news-item">
+                <div class="news-top">
+                    <div class="profile-pic">
+                        <img src=<%= newsItem.imgSrc %>> // need to change this profile picture out
+                    </div>
+                    <span class="user-name">
+                        <%= newsItem.author %>
+                    </span>
+                    <span class="dot">•</span>
+                    <span class="time">
+                        <%= newsItem.time %>
+                    </span>
+                    <span class="dot">•</span>
+                    <span class="news-status">News popular near you</span>
+                </div>
+                <div class="news-image">
+                    <img src="">
+                </div>
+                <div class="news-content">
+                    <h3><%= newsItem.title %></h3>
+                    <p><%= newsItem.content %></p>
+                    <button
+                        onclick=""
+                        class="verify-btn">
+                        Verify
+                    </button>
+                </div>
+            </article>
         <% }); %>
     </div>
 
