@@ -15,6 +15,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // In-memory storage for liked news (replace with a database in a real application)
 let likedNews = [];
+const newsList = [
+    { title: 'Breaking News: New Tech Revolution!', content: 'A major breakthrough in artificial intelligence is set to change the world as we know it.' },
+    { title: 'Sports Update: Soccer World Cup 2024', content: 'The World Cup is heating up, with new teams making surprising advances.' },
+    { title: 'Weather Alert: Hurricane Approaching', content: 'A powerful storm is set to hit the east coast. Preparations are underway.' },
+    { title: 'Health News: New Vaccine Approved', content: 'A new vaccine has been approved for public use, offering protection against the latest strain of the flu.' }
+];
 
 // Home page route (web-scraped news)
 app.get('/', async (req, res) => {
@@ -22,7 +28,8 @@ app.get('/', async (req, res) => {
         const scrapedNews = await scrapeNews();
         res.render('home', { news: scrapedNews, likedNews });
     } catch (error) {
-        console.error('Error fetching scraped news:', error);
+        console.error('Error fetching scraped news: check line 25 of server.js');
+        // console.error('Error fetching scraped news:', error);
         res.status(500).send('Error fetching news');
     }
 });
@@ -33,7 +40,8 @@ app.get('/verified-news', async (req, res) => {
         const verifiedNews = await fetchVerifiedNews();
         res.render('verified-news', { news: verifiedNews, likedNews });
     } catch (error) {
-        console.error('Error fetching verified news:', error);
+        console.error('Error fetching verified news: check line 37 of server.js', );
+        // console.error('Error fetching verified news:', error);
         res.status(500).send('Error fetching news');
     }
 });
@@ -42,6 +50,12 @@ app.get('/verified-news', async (req, res) => {
 app.get('/liked-news', (req, res) => {
     res.render('liked-news', { likedNews });
 });
+
+
+app.get('/map', (req, res) => {
+    res.render('map', { newsList });
+});
+
 
 // Like/unlike news route
 app.post('/toggle-like/:id', express.json(), (req, res) => {
@@ -73,7 +87,8 @@ async function scrapeNews() {
 
         return news;
     } catch (error) {
-        console.error('Error scraping news:', error);
+        console.error('Error scraping news: check line 78 of server.js');
+        // console.error('Error scraping news:', error);
         return [];
     }
 }
@@ -98,7 +113,8 @@ async function fetchVerifiedNews() {
             source: 'API',
         }));
     } catch (error) {
-        console.error('Error fetching verified news:', error);
+        console.error('Error fetching verified news: check line 104 of server.js');
+        // console.error('Error fetching verified news:', error);
         return [];
     }
 }
