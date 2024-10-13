@@ -50,58 +50,45 @@
         </div>
         <h1 class="feed-title">News feed</h1>
         <div class="news-container">
-            <% 
-            // Array of profile image URLs
-            const profileImages = [
-                "/images/profile-1.jpg",
-                "/images/profile-2.jpg",
-                "/images/profile-3.jpg",
-                "/images/profile-4.png",
-                "/images/profile-5.png",
-                "/images/profile-3.jpg",
-            ];
-
-            const userNames = [
-            "Alice Johnson", "Bob Smith", "Charlie Adams", 
-            "Dana Lee", "Evelyn Harris", "Frank Moore"
-            ];
-            
-            const times = ["1h ago", "2h ago", "3h ago", "4h ago", "5h ago", "6h ago"];
-            %>
-        
-            <% for(let i = 1; i <= 6; i++) { 
-                const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
-                const randomName = userNames[i % userNames.length];
-                const randomTime = times[i % times.length];  
-            %>
-                
-                <article class="news-item">
+            <% newsList.forEach(function(newsItem) { %>
+                <article class="news-item" id=<%= newsItem.id %>>
                     <div class="news-top">
-                        <h1></h1>
                         <div class="profile-pic">
-                            <img src="<%= randomImage %>" alt="User Profile Picture <%= i %>">
+                            <img src=<%=newsItem.imgSrc %>> // need to change this profile picture out
                         </div>
-                        <span class="user-name"><%= randomName %></span>
+                        <span class="user-name">
+                            <%= newsItem.author %>
+                        </span>
                         <span class="dot">•</span>
-                        <span class="time"><%= randomTime %></span>
+                        <span class="time">
+                            <%= newsItem.time %>
+                        </span>
                         <span class="dot">•</span>
                         <span class="news-status">News popular near you</span>
                     </div>
-
                     <div class="news-image">
-                        <img src="https://picsum.photos/seed/<%= i %>/400/200" alt="Sample Article Image <%= i %>">
+                        <img src=<%= newsItem.newsImgSrc %>>
                     </div>
                     <div class="news-content">
-                        <h3>Lorem Ipsum Dolor Sit Amet <%= i %></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <button onclick="toggleLike('sample-<%= i %>', 'Lorem Ipsum Dolor Sit Amet <%= i %>', 'Lorem ipsum dolor sit amet...', 'Sample')" class="verify-btn">
+                        <h3>
+                            <%= newsItem.title %>
+                        </h3>
+                        <p>
+                            <%= newsItem.content %>
+                        </p>
+                        <button onclick="" class="verify-btn">
                             Verify
                         </button>
                     </div>
                 </article>
-            <% } %>
+                <% }); %>
+        </div>
         </div>
     </main>
+
+    <script src="/js/handler.js"></script>
+
+
     <nav class="bottom-nav">
         <a href="/">
             <div class="nav-icon"><img src="/vectors/home.svg"></div>
@@ -111,12 +98,11 @@
             <div class="nav-icon"><img src="/vectors/verified-icon.svg"></div>
             <span>Verified News</span>
         </a>
-        <a href="/map">
+        <!-- <a href="/map">
             <div class="nav-icon"><img src="/vectors/map.svg"></div>
             <span>Map</span>
-        </a>
+        </a> -->
     </nav>
 </nav>
-    <script src="/script.js"></script>
 </body>
 </html>

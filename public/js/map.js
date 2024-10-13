@@ -3,7 +3,6 @@ const map = L.map('map')
 // map.setView([-27.47043, 153.0255], 13)
 map.setView([44.738027, -63.304645], 23) // set default view to "that street" in canada if the location is disabled
 
-
 // Add a tile layer to the map
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     // maxZoom: 23,

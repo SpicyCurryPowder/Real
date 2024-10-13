@@ -16,17 +16,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 // In-memory storage for liked news (replace with a database in a real application)
 let likedNews = [];
 const newsList = [
-    { author: 'Bob Smith', time: '2 min ago', imgSrc: 'images/profile-1.jpg', title: 'Breaking News: New Tech Revolution!', content: 'A major breakthrough in artificial intelligence is set to change the world as we know it.' },
-    { author: 'Evelyn Harris', time: '12 min ago', imgSrc: 'images/profile-4.png', title: 'Sports Update: Soccer World Cup 2024', content: 'The World Cup is heating up, with new teams making surprising advances.' },
-    { author: 'Dana Lee', time: '1h ago', imgSrc: 'images/profile-3.jpg', title: 'Weather Alert: Hurricane Approaching', content: 'A powerful storm is set to hit the east coast. Preparations are underway.' },
-    { author: 'Alice Johnson', time: '2h ago', imgSrc: 'images/profile-2.jpg', title: 'Health News: New Vaccine Approved', content: 'A new vaccine has been approved for public use, offering protection against the latest strain of the flu.' }
+    { id: 1, author: 'Bob Smith', time: '2 min ago', imgSrc: 'images/profile-1.jpg', newsImgSrc: 'images/techrevol.jpg', 
+        title: 'Breaking News: New Tech Revolution!', content: 'A major breakthrough in artificial intelligence is set to change the world as we know it. ThirdEye Data ', 
+        coordinates: [37.3288, -121.8935] },
+    { id: 2, author: 'Evelyn Harris', time: '12 min ago', imgSrc: 'images/profile-4.png', newsImgSrc: 'images/soccer.jpg', 
+        title: 'Sports Update: Soccer World Cup 2024', content: 'The World Cup is heating up, with new teams making surprising advances. 2024 ICC Women\'s T20 World Cup',
+        coordinates: [25.04681, 55.21928] },
+    { id: 3, author: 'Dana Lee', time: '1h ago', imgSrc: 'images/profile-3.jpg', newsImgSrc: 'images/hurricaneMilton.jpg', 
+        title: 'Weather Alert: Hurricane Approaching', content: 'A powerful storm is set to hit the east coast. Preparations are underway.',
+        coordinates: [27.2667, -82.5465] },
+    { id: 4, author: 'Alice Johnson', time: '2h ago', imgSrc: 'images/profile-2.jpg', newsImgSrc: 'images/vaccine.jpg', 
+        title: 'Health News: New Vaccine Approved', content: 'A new vaccine has been approved for public use, offering protection against the latest strain of the flu.',
+        coordinates: [40.75515, -73.9995]}
 ];
 
 // Home page route (web-scraped news)
 app.get('/', async (req, res) => {
     try {
         const scrapedNews = await scrapeNews();
-        res.render('home', { news: scrapedNews, likedNews });
+        res.render('home', { newsList });
     } catch (error) {
         console.error('Error fetching scraped news: check line 25 of server.js');
         // console.error('Error fetching scraped news:', error);
@@ -54,6 +62,23 @@ app.get('/liked-news', (req, res) => {
 
 app.get('/map', (req, res) => {
     res.render('map', { newsList });
+});
+
+// Route to show individual post based on postId
+app.get('/post/:id', (req, res) => {
+    const postId = parseInt(req.params.id);
+    // console.log(postId);
+    const post = newsList.find(p => p.id === postId);
+
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+
+    res.render('post', { post });
+});
+
+app.get('/locations', (req, res) => {
+    res.json(newsList);
 });
 
 
