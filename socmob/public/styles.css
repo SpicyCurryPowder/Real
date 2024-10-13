@@ -14,6 +14,7 @@ header {
     background-color: #3188BF;
     color: #fff;
     padding: 0.3rem 20px;
+    height: 60px;
 }
 
 main {
@@ -41,9 +42,24 @@ main {
     justify-content: flex-end; 
 }
 
+
 .settings img {
     width: 30px; 
     height: auto; 
+}
+
+.a-settings {
+    display: flex;
+    align-items: center;
+    margin-left: 27rem;
+
+
+}
+
+.a-settings img{
+    width: 24px; 
+    height: auto; 
+
 }
 
 .hello {
@@ -83,7 +99,7 @@ main {
 .search-container {
     display: flex; 
     justify-content: center; 
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .search-wrapper {
@@ -101,7 +117,6 @@ main {
     outline: none; 
     margin-bottom: 30px;
     height: 30px;
-    margin-top: 0px;
     text-align:center
 
 }
@@ -141,12 +156,15 @@ main {
 
 }
 
-
 .feed-title {
     color: #16498C;
     font-size: 27px;
     margin-bottom: 1rem;
     font-weight: medium;
+}
+.verified-news-status {
+    color: #447B14;
+    margin-right: 30px;
 }
 
 .add-news-button:hover {
@@ -440,6 +458,72 @@ main {
 .bottom-nav span {
     font-size: 0.8rem;
 }
+
+.live{
+    margin-top: 100px;
+     color: #B50303;
+}
+
+.update {
+    display: inline-block;
+    color: rgb(136, 136, 136);
+    font-weight: lighter;
+    font-size: small;
+    vertical-align: middle;
+    margin-left: 5px; 
+}
+
+.live-updates {
+    padding: 10px 0;
+}
+
+.live {
+    display: inline;
+    font-size: 24px; 
+}
+
+.reddot {
+    display: inline-block;
+    color: #B50303; 
+    font-size: 24px; 
+    vertical-align: middle;
+    margin-left: 5px; 
+}
+
+.update {
+    display: inline-block;
+    color: black;
+    font-size: 12px; 
+    font-weight: 300; 
+    vertical-align: middle;
+    margin-left: 5px; 
+}
+
+.live-news-container {
+    display: flex;
+    overflow-x: auto;
+    padding-top: 10px;
+}
+
+.circle-item {
+    flex: 0 0 auto;
+    text-align: center;
+    margin-right: 15px; 
+}
+
+.circle-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover; 
+}
+
+.circle-item p {
+    font-size: 15px;
+    margin-top: 5px;
+    color: #333;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

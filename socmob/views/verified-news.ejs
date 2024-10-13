@@ -7,14 +7,82 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <header>
-        <h1>REAL .</h1>
+    <header>    
+        <div class="a-settings">        
+            <img src="/images/filter.png">
+        </div>
     </header>
     <main>
-        <h2>Verified News</h2>
+        <h1 class="location">Your current location</h1>
+        <h1 class="address"><img src="/images/Vector.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <br>
+        <h1 class="live">LIVE<span class="reddot"> • </span><span class="update">Update</span></h1>
+        <!-- Scrollable Circles for Live Updates -->
+        <div class="live-news-container">
+            <div class="circle-item">
+                <img src="/images/southbank.jpg" alt="Southbank">
+                <p>Southbank<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/Albertstreet.jpg" alt="Albert Street">
+                <p>Albert Street<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/fortitudevalley.jpg" alt="Fortitude Valley">
+                <p>Fortitude Valley<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/koala.jpg" alt="Newstead">
+                <p>Woolloongabba<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/kangroo.jpg" alt="Kangaroo Point">
+                <p>Kangaroo Point<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/city.jpg" alt="West End">
+                <p>Brisbane City<span class="reddot"> • </span></p>
+            </div>
+        </div>
+        <h1 class="feed-title">Verified news in your area</h1>
         <div class="news-container">
-            <% for(let i = 1; i <= 6; i++) { %>
+            <% 
+            // Array of profile image URLs
+            const profileImages = [
+                "/images/profile-1.jpg",
+                "/images/profile-2.jpg",
+                "/images/profile-3.jpg",
+                "/images/profile-4.png",
+                "/images/profile-5.png",
+                "/images/profile-3.jpg",
+            ];
+
+            const userNames = [
+            "Alice Johnson", "Bob Smith", "Charlie Adams", 
+            "Dana Lee", "Evelyn Harris", "Frank Moore"
+            ];
+            
+            const times = ["1h ago", "2h ago", "3h ago", "4h ago", "5h ago", "6h ago"];
+            %>
+        
+            <% for(let i = 1; i <= 6; i++) { 
+                const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+                const randomName = userNames[i % userNames.length];
+                const randomTime = times[i % times.length];  
+            %>
+                
                 <article class="news-item">
+                    <div class="news-top">
+                        <div class="profile-pic">
+                            <img src="<%= randomImage %>" alt="User Profile Picture <%= i %>">
+                        </div>
+                        <span class="user-name"><%= randomName %></span>
+                        <span class="dot">•</span>
+                        <span class="time"><%= randomTime %></span>
+                        <span class="dot">•</span>
+                        <span class="verified-news-status">Verified</span>
+                    </div>
+
                     <div class="news-image">
                         <img src="https://picsum.photos/seed/<%= i + 10 %>/400/200" alt="Sample Article Image <%= i %>">
                     </div>
@@ -31,11 +99,11 @@
     </main>
     <nav class="bottom-nav">
         <a href="/">
-            <div class="nav-icon">🏘️</div>
+            <div class="nav-icon"><img src="/images/Home.png" alt=""></div>
             <span>Home</span>
         </a>
         <a href="/verified-news" class="active">
-            <div class="nav-icon">✅</div>
+            <div class="nav-icon-verified"><img src="/images/verify.png" alt=""></div>
             <span>Verified News</span>
         </a>
     </nav>
