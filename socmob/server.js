@@ -40,10 +40,20 @@ app.get('/verified-news', async (req, res) => {
   }
 });
 
+
 // Liked news page route
-app.get('/liked-news', (req, res) => {
-  res.render('liked-news', { likedNews });
+app.get('/newspage-news', (req, res) => {
+  res.render('newspage-news');
 });
+
+// Liked news page route
+app.get('/source-news', (req, res) => {
+  res.render('source-news');
+});
+
+
+
+
 
 // Like/unlike news route
 app.post('/toggle-like/:id', express.json(), (req, res) => {
