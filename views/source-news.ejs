@@ -10,31 +10,124 @@
 
 <body>
     <header>
-        <h1>REAL .</h1>
+        <h1 class="logo">Real
+            <img src="/images/green_circle.png">
+        </h1>
+        <div class="settings">
+            <img src="/images/settings.png">
+        </div>
+    
     </header>
     <main>
-        <h2>Sources</h2>
+        <br>
+
+        <div class="tiles-container">
+            <div class="tile">
+                <span class="tile-text">+ Add Sources</span>
+            </div>
+            <div class="tile">
+                <span class="tile-text">Flag</span>
+                <img class="flag" src="/images/flag.png" alt="">
+            </div>
+        </div>
+        <br>
+
+        <h1 class="feed-title">Heading of the news</h1>
+        <p>Sources</p>
         <div class="news-container">
-            <% likedNews.forEach(item=> { %>
-                <div class="news-item">
-                    <h3>
-                        <%= item.title %>
-                    </h3>
-                    <p>
-                        <%= item.description %>
-                    </p>
-                    <p><strong>Source:</strong>
-                        <%= item.source %>
-                    </p>
-                    <button
-                        onclick="toggleLike('<%= item.id %>', '<%= item.title %>', '<%= item.description %>', '<%= item.source %>')"
-                        class="like-btn liked">
-                        Unlike
-                    </button>
-                </div>
-                <% }); %>
+            <% 
+            const profileImages=[ "/images/profile-1.jpg" , "/images/profile-2.jpg", 
+            "/images/profile-3.jpg" , "/images/profile-4.png" , "/images/profile-5.png" , "/images/profile-3.jpg"]; 
+            const userNames=[ "Wild boar spotted in Albert St" , "Wild boar spotted in Albert St", 
+                "Wild boar spotted in Albert St" , 
+                "Wild boar spotted in Albert St" , 
+                "Wild boar spotted in Albert St", 
+                "Wild boar spotted in Albert St" ]; 
+            const times=["02 Oct, 2023 | 8:16PM", 
+                "07 Oct, 2024  |  12:08PM", 
+                "02 Oct, 2023  |  08:16PM" , 
+                "04 Oct, 2023  |  08:16PM" , 
+                "02 Oct, 2023  |  8:16PM" ]; 
+            %>
+
+                <% for(let i=1; i <=2; i++) { const randomImage=profileImages[Math.floor(Math.random() *
+                    profileImages.length)]; const randomName=userNames[i % userNames.length]; const randomTime=times[i %
+                    times.length]; %>
+
+                    <article class="news-item">
+                        <div class="news-top">
+                            <span class="user-name">
+                                <%= randomName %>
+                            </span>
+                            <span class="dot">|</span>
+                            <span class="time">
+                                <%= randomTime %>
+                            </span>
+
+                        </div>
+
+                        <div class="news-image">
+                            <img src="https://picsum.photos/seed/<%= i + 10 %>/400/200"
+                                alt="Sample Article Image <%= i %>">
+                        </div>
+                        <div class="news-content">
+                            <p>Report</p>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit anim id est laborum.</p>
+                            <p class="link">Link: <a href="https://www.britannica.com/animal/koala"
+                                    target="_blank">https://www.britannica.com/animal/koala</a></p>
+                            <div class="address-container" style="display:  flex; justify-content: space-between;">
+                                <img src="/vectors/like.png" style="height: 40px; " alt="Vote Icon" class="address-icon">
+                                <h1 class="address">
+                                    <img src="/images/landmark.png" alt="Location Icon">Albert St Brisbane City
+                                </h1>
+                            </div>
+                        </div>
+                    </article>
+                    <% } %>
+                        <article class="news-item video-thumbnail">
+                            <div class="news-top">
+                                <span class="user-name">Wild boar spotted</span>
+                                <span class="dot">|</span>
+                                <span class="time">08 Oct, 2023 | 10:00AM</span>
+                            </div>
+
+                            <div class="news-image">
+                                <video controls width="100%"> <!-- Use the video tag here -->
+                                    <source src="https://www.youtube.com/watch?v=vrzYCBUEMgA" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="news-content">
+                                <p>Five wild boars spotted outside local pub</p>
+                                <p class="link">Link: <a href="https://www.example.com" target="_blank">Watch Video</a>
+                                </p>
+                                <div class="address-container" style="display:  flex; justify-content: space-between;">
+                                    <img src="/vectors/like.png" style="height: 40px;" alt="Vote Icon" class="address-icon">
+                                    <h1 class="address">
+                                        <img src="/images/landmark.png" alt="Location Icon">Albert St Brisbane City
+                                    </h1>
+                                </div>
+                            </div>
+                        </article>
+        </div>
+        <br>
+        <div class="disclaimer">
+            <h5>Our Principles:</h5>
+            <p>
+                All posts will have appropriate citations to verify the content and go through first-hand AI
+                verification. Posts can be turned unverified or marked as missing sources when identified and labeled as
+                fake if proven false with evidence. Users who make abusive claims will be removed from the community
+                after a warning.
+            </p>
+        </div>
+
+
+        <div class="news-container">
         </div>
     </main>
+
     <nav class="bottom-nav">
         <a href="/">
             <div class="nav-icon"><img src="/vectors/home.svg"></div>
@@ -45,10 +138,21 @@
             <span>Verified News</span>
         </a>
         <!-- <a href="/map">
-            <div class="nav-icon"><img src="/vectors/map.svg"></div>
-            <span>Map</span>
-        </a> -->
+                <div class="nav-icon"><img src="/vectors/map.svg"></div>
+                <span>Map</span>
+            </a> -->
     </nav>
+
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 REAL.</p>
+            <div class="footer-links">
+                <a href="#">Team Curry Powder</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 
 </html>

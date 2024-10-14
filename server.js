@@ -53,8 +53,9 @@ app.get('/newspage-verified', (req, res) => {
     res.render('newspage-verified', { article: req.query });
 });
 
-// const verifiedNewsRouter = require('./routes/news-verified')
-// app.use('/verified-news', verifiedNewsRouter);
+app.get('/source-news', (req, res) => {
+    res.render('source-news');
+});
 
 app.get('/verified-news', (req, res) => {
     res.render('verified-news', { newsList });
