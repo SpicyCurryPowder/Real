@@ -45,57 +45,64 @@
             </div>
         </div>
         <h1 class="feed-title">Verified news in your area</h1>
-        <div class="news-container">
-            <% 
-            // Array of profile image URLs
-            const profileImages = [
-                "/images/profile-1.jpg",
-                "/images/profile-2.jpg",
-                "/images/profile-3.jpg",
-                "/images/profile-4.png",
-                "/images/profile-5.png",
-                "/images/profile-3.jpg",
-            ];
+    <div class="news-container">
+        <% 
+        // Array of profile image URLs
+        const profileImages = [
+            "/images/profile-1.jpg",
+            "/images/profile-2.jpg",
+            "/images/profile-3.jpg",
+            "/images/profile-4.png",
+            "/images/profile-5.png",
+            "/images/profile-3.jpg",
+        ];
 
-            const userNames = [
-            "Alice Johnson", "Bob Smith", "Charlie Adams", 
-            "Dana Lee", "Evelyn Harris", "Frank Moore"
-            ];
-            
-            const times = ["1h ago", "2h ago", "3h ago", "4h ago", "5h ago", "6h ago"];
-            %>
+        const userNames = [
+        "Alice Johnson", "Bob Smith", "Charlie Adams", 
+        "Dana Lee", "Evelyn Harris", "Frank Moore"
+        ];
         
-            <% for(let i = 1; i <= 6; i++) { 
+        const times = ["1h ago", "2h ago", "3h ago", "4h ago", "5h ago", "6h ago"];
+        %>
+    
+        <% if (Array.isArray(articles) && articles.length > 0) { %>
+            <% articles.forEach((article, index) => { 
                 const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
-                const randomName = userNames[i % userNames.length];
-                const randomTime = times[i % times.length];  
+                const randomName = userNames[index % userNames.length];
+                const randomTime = times[index % times.length];
             %>
-                
-                <article class="news-item">
-                    <div class="news-top">
-                        <div class="profile-pic">
-                            <img src="<%= randomImage %>" alt="User Profile Picture <%= i %>">
-                        </div>
-                        <span class="user-name"><%= randomName %></span>
-                        <span class="dot">•</span>
-                        <span class="time"><%= randomTime %></span>
-                        <span class="dot">•</span>
-                        <span class="verified-news-status">Verified</span>
+            
+            <article class="news-item">
+                <!-- <div class="ribbon verified"></div>
+                    Verified
+                </div> -->
+                <div class="news-top">
+                    <div class="profile-pic">
+                        <img src="<%= randomImage %>" alt="User Profile Picture <%= index + 1 %>">
                     </div>
+                    <span class="user-name"><%= randomName %></span>
+                    <span class="dot">•</span>
+                    <span class="time"><%= randomTime %></span>
+                    <span class="dot">•</span>
+                    <span class="verified-news-status">Verified</span>
+                </div>
 
-                    <div class="news-image">
-                        <img src="https://picsum.photos/seed/<%= i + 10 %>/400/200" alt="Sample Article Image <%= i %>">
-                    </div>
-                    <div class="news-content">
-                        <h3>Verified Lorem Ipsum <%= i %></h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <button onclick="toggleLike('verified-<%= i %>', 'Verified Lorem Ipsum <%= i %>', 'Duis aute irure dolor...', 'API')" class="like-btn">
-                            Like
-                        </button>
-                    </div>
-                </article>
-            <% } %>
-        </div>
+                <div class="news-image">
+                    <img src="<%= article.image_url || `https://picsum.photos/seed/${index}/400/200` %>" alt="Article Image <%= index + 1 %>">
+                </div>
+                <div class="news-content">
+                    <h3><%= article.title %></h3>
+                    <p><%= article.description %></p>
+                    <a href="/source-news" class="verify-btn">
+                        Verify
+                    </a>
+                </div>
+            </article>
+            <% }) %>
+        <% } else { %>
+            <p>No verified news articles available at the moment. Please try again later.</p>
+        <% } %>
+    </div>
     </main>
     <nav class="bottom-nav">
         <a href="/">
@@ -107,6 +114,13 @@
             <span>Verified News</span>
         </a>
     </nav>
-    <script src="/script.js"></script>
+    <footer></footer>
+        <div class="footer-container">
+            <p>&copy; 2024 REAL.</p>
+            <div class="footer-links">
+                <a href="#">Team Curry Powder</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
