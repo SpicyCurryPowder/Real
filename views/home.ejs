@@ -52,6 +52,9 @@
         <div class="news-container">
             <% newsList.forEach(function(newsItem) { %>
                 <article class="news-item" id=<%= newsItem.id %>>
+                    <div class="ribbon <%= newsItem.ribbonType %>">
+                        <%= newsItem.ribbonType.charAt(0).toUpperCase() + newsItem.ribbonType.slice(1) %>
+                    </div>
                     <div class="news-top">
                         <div class="profile-pic">
                             <img src=<%=newsItem.imgSrc %>> // need to change this profile picture out
@@ -76,9 +79,10 @@
                         <p>
                             <%= newsItem.content %>
                         </p>
-                        <button onclick="" class="verify-btn">
+                        <!-- <button onclick="" class="verify-btn">
                             Verify
-                        </button>
+                        </button> -->
+                        
                     </div>
                 </article>
                 <% }); %>

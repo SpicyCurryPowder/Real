@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REAL . - Unverified News</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="arrow">
+            <img src="/images/Line.png">
+        </div>
+        <div class="share-icon">
+            <img src="/images/Share.png" alt="Share  Icon">
+        </div>
+    </header>
+    <main>
+        <h1 class="location">News feed location</h1>
+        <h1 class="address"><img src="/images/landmark.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <br>
+        <div class="image-tile-container">
+            <!-- Image Section -->
+            <img src="<%= article.image_url || '/images/koala.jpg' %>" alt="Article Image" class="full-width-image">
+
+            <!-- Blue and Red Tile with Unverified label -->
+            <div class="full-width-tile">
+                <h5 class="tile-heading">
+                    <%= article.title %>
+                </h5>
+                <span class="unverified-label">Unverified</span>
+            </div>
+        </div>
+        <br>
+        <div class="user-info-container">
+            <div class="user-profile">
+                <img src="/images/profile-1.jpg" alt="User Profile" class="profile-pic">
+            </div>
+            <div class="user-details">
+                <span class="user-name">John Doe</span>
+                <span class="date-time">October 14, 2024 | 10:00 AM</span>
+            </div>
+            <a href="/source-news" class="verify-btn">
+                Verify
+            </a>
+        </div>
+        <h4 class="heading-heat">News Interaction Heatmap: <span class="secondary-text">See How Users Engage</span></h4>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p class="para">
+            <%= article.description %>
+        </p>
+        <div class="disclaimer">
+            <h5>Our terms & conditions:</h5>
+            <p>
+                All posts will have appropriate citations to verify the content and go through first-hand AI
+                verification. Posts can be turned unverified or marked as missing sources when identified and labeled as
+                fake if proven false with evidence. Users who make abusive claims will be removed from the community
+                after a warning.
+            </p>
+        </div>
+        <p>Source ID: <%= article.source_id %>
+        </p>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 REAL.</p>
+            <div class="footer-links">
+                <a href="#">Team Curry Powder</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -5,35 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REAL . - Verified News</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <header>
-        <h1>REAL .</h1>
+        <h1 class="logo">Real
+            <img src="/images/green_circle.png">
+        </h1>
+        <div class="settings">
+            <img src="/images/settings.png">
+        </div>
+    
     </header>
     <main>
-        <h2>Verified News</h2>
+        <h1 class="location">Your current location</h1>
+        <h1 class="address"><img src="/images/landmark.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <br>
+        <h1 class="live">LIVE<span class="reddot"> • </span><span class="update">Update</span></h1>
+        <!-- Scrollable Circles for Live Updates -->
+        <div class="live-news-container">
+            <div class="circle-item">
+                <img src="/images/southbank.jpg" alt="Southbank">
+                <p>Southbank<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/Albertstreet.jpg" alt="Albert Street">
+                <p>Albert Street<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/fortitudevalley.jpg" alt="Fortitude Valley">
+                <p>Fortitude Valley<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/koala.jpg" alt="Newstead">
+                <p>Woolloongabba<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/kangroo.jpg" alt="Kangaroo Point">
+                <p>Kangaroo Point<span class="reddot"> • </span></p>
+            </div>
+            <div class="circle-item">
+                <img src="/images/city.jpg" alt="West End">
+                <p>Brisbane City<span class="reddot"> • </span></p>
+            </div>
+        </div>
+        <h1 class="feed-title">Verified news in your area</h1>
         <div class="news-container">
-            <% for(let i=1; i <=6; i++) { %>
-                <article class="news-item">
+            <% newsList.forEach(function(newsItem) { %>
+                <% if (newsItem.ribbonType == 'verified') { %>
+
+                <article class="news-item" id=<%=newsItem.id %>>
+                    <div class="ribbon <%= newsItem.ribbonType %>">
+                        <%= newsItem.ribbonType.charAt(0).toUpperCase() + newsItem.ribbonType.slice(1) %>
+                    </div>
+                    <div class="news-top">
+                        <div class="profile-pic">
+                            <img src=<%=newsItem.imgSrc %>> // need to change this profile picture out
+                        </div>
+                        <span class="user-name">
+                            <%= newsItem.author %>
+                        </span>
+                        <span class="dot">•</span>
+                        <span class="time">
+                            <%= newsItem.time %>
+                        </span>
+                        <span class="dot">•</span>
+                        <span class="news-status">News popular near you</span>
+                    </div>
                     <div class="news-image">
-                        <img src="https://picsum.photos/seed/<%= i + 10 %>/400/200" alt="Sample Article Image <%= i %>">
+                        <img src=<%=newsItem.newsImgSrc %>>
                     </div>
                     <div class="news-content">
-                        <h3>Verified Lorem Ipsum <%= i %>
+                        <h3>
+                            <%= newsItem.title %>
                         </h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.</p>
-                        <button
-                            onclick="toggleLike('verified-<%= i %>', 'Verified Lorem Ipsum <%= i %>', 'Duis aute irure dolor...', 'API')"
-                            class="like-btn">
-                            Like
-                        </button>
+                        <p>
+                            <%= newsItem.content %>
+                        </p>
+                        <!-- <button onclick="" class="verify-btn">
+                                    Verify
+                                </button> -->
+        
                     </div>
                 </article>
-                <% } %>
+                <% } }); %>
         </div>
     </main>
     <nav class="bottom-nav">
@@ -46,10 +102,18 @@
             <span>Verified News</span>
         </a>
         <!-- <a href="/map">
-            <div class="nav-icon"><img src="/vectors/map.svg"></div>
-            <span>Map</span>
-        </a> -->
+                <div class="nav-icon"><img src="/vectors/map.svg"></div>
+                <span>Map</span>
+            </a> -->
     </nav>
+    <footer></footer>
+    <div class="footer-container">
+        <p>&copy; 2024 REAL.</p>
+        <div class="footer-links">
+            <a href="#">Team Curry Powder</a>
+        </div>
+    </div>
+    </footer>
 </body>
 
 </html>

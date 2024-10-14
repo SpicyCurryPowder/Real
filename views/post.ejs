@@ -27,22 +27,50 @@
     
     </header>
     <main>
-        <div class="news-container">
-            <h1>
-                <%= post.title %>
-            </h1>
-            <p>
-                <%= post.author %>
-            </p>
-            <p>
-                <%= post.content %>
-            </p>
+        <div class="image-tile-container">
+            <!-- Image Section -->
+            <img src="../<%= post.newsImgSrc %>" alt="Article Image" class="full-width-image">
+        
+            <!-- Blue and Red Tile with Unverified label -->
+            <div class="full-width-tile">
+                <h5 class="tile-heading">
+                    <%= post.title %>
+                </h5>
+                <span class="label"><%= post.ribbonType %></span>
+            </div>
         </div>
 
+        <div class="user-info-container">
+            <div class="user-profile">
+                <img src="../<%= post.imgSrc %>" alt="User Profile" class="profile-pic">
+            </div>
+            <div class="user-details">
+                <span class="user-name">John Doe</span>
+                <span class="date-time">October 14, 2024 | 10:00 AM</span>
+            </div>
+            <a href="/source-news" class="verify-btn">
+                Verify
+            </a>
+        </div>
+
+        <h4 class="heading-heat">News Interaction Heatmap: <span class="secondary-text">See How Users Engage</span></h4>
         <div id="map" style="height: 60vh; margin: 2rem; z-index: -10;"></div>
         <div id="location-not-available" style="text-align:center; background-color: lightgrey; height: 60vh; margin: 2rem; display: none;">Location not available</div>
 
-        
+
+
+        <p class="para">
+            <%= post.content %>
+        </p>
+        <div class="disclaimer">
+            <h5>Our terms & conditions:</h5>
+            <p>
+                All posts will have appropriate citations to verify the content and go through first-hand AI
+                verification. Posts can be turned unverified or marked as missing sources when identified and labeled as
+                fake if proven false with evidence. Users who make abusive claims will be removed from the community
+                after a warning.
+            </p>
+        </div>
     </main>
 
 
