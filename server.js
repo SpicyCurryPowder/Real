@@ -15,23 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // In-memory storage for liked news (replace with a database in a real application)
 let likedNews = [];
-const newsList = [
-    { id: 1, author: 'Bob Smith', time: '2 min ago', imgSrc: 'images/profile-1.jpg', newsImgSrc: 'images/techrevol.jpg', ribbonType: "verified",
-        title: 'Breaking News: New Tech Revolution!', content: 'A major breakthrough in artificial intelligence is set to change the world as we know it. ThirdEye Data ', 
-        coordinates: [37.3288, -121.8935] },
-    {
-        id: 2, author: 'Evelyn Harris', time: '12 min ago', imgSrc: 'images/profile-4.png', newsImgSrc: 'images/soccer.jpg', ribbonType: "verified",
-        title: 'Sports Update: Soccer World Cup 2024', content: 'The World Cup is heating up, with new teams making surprising advances. 2024 ICC Women\'s T20 World Cup',
-        coordinates: [25.04681, 55.21928] },
-    {
-        id: 3, author: 'Dana Lee', time: '1h ago', imgSrc: 'images/profile-3.jpg', newsImgSrc: 'images/hurricaneMilton.jpg', ribbonType: "unverified",
-        title: 'Weather Alert: Hurricane Approaching', content: 'A powerful storm is set to hit the east coast. Preparations are underway.',
-        coordinates: [27.2667, -82.5465] },
-    {
-        id: 4, author: 'Alice Johnson', time: '2h ago', imgSrc: 'images/profile-2.jpg', newsImgSrc: 'images/vaccine.jpg', ribbonType: "fake",
-        title: 'Health News: New Vaccine Approved', content: 'A new vaccine has been approved for public use, offering protection against the latest strain of the flu.',
-        coordinates: [40.75515, -73.9995]}
-];
+const newsList = require('./data.json');
 
 // Home page route (web-scraped news)
 app.get('/', async (req, res) => {
@@ -82,6 +66,11 @@ app.get('/locations', (req, res) => {
     res.json(newsList);
 });
 
+// Serve data.json file via an API endpoint
+app.get('/api/data', (req, res) => {
+    const data = require('./data.json'); // Synchronously load the JSON data
+    res.json(data); // Send the data as JSON in the response
+});
 
 // Like/unlike news route
 app.post('/toggle-like/:id', express.json(), (req, res) => {

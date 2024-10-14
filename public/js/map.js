@@ -1,77 +1,90 @@
-// Initialize the map and set its view
-const map = L.map('map')
-// map.setView([-27.47043, 153.0255], 13)
-map.setView([44.738027, -63.304645], 23) // set default view to "that street" in canada if the location is disabled
+// Initialize the map
+const map = L.map("map").setView([51.505, -0.09], 13); // Default to London for example
 
-// Add a tile layer to the map
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    // maxZoom: 23,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// Add OpenStreetMap tiles to the map
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-map.locate({ setView: true, watch: true }) // locate user's current location
-    .on('locationfound', function (e) {
-        var marker = L.marker([e.latitude, e.longitude]).bindPopup('You are here :)')
-        map.addLayer(marker);
-        map.setView([e.latitude, e.longitude], 13); // set map view to user current location
-        marker.openPopup();
+const markersClusterGroup = L.markerClusterGroup();
 
-        var circle = L.circle([e.latitude, e.longitude], e.accuracy / 2, {
-            weight: 1,
-            color: 'blue',
-            fillColor: '#cacaca',
-            fillOpacity: 0.2
-        });
-        map.addLayer(circle);
-    })
-    .on('locationerror', function (e) {
-        console.log(e);
-        alert("Location access denied. Defaulting to This Street");
-    });
+const distanceThreshold = 1000; // 500 meters (adjust as necessary)
 
+// Array to hold the marker data
+let leafletMarkers = [];
 
+// Function to load data from /api/data and add markers to the map
+function loadMarkersFromAPI() {
+    fetch("/api/data")
+        .then((response) => response.json())
+        .then((data) => {
+            data.forEach(function (markerData) {
+                const { id, coordinates, title } = markerData;
+                const marker = L.marker([coordinates[0], coordinates[1]])
+                    .bindPopup(`<b>${id}, ${title}</b>`)
+                    // .addTo(map);
 
+                markersClusterGroup.addLayer(marker);
 
+                // Store the marker data
+                leafletMarkers.push({
+                    id: id,
+                    lat: coordinates[0],
+                    lng: coordinates[1],
+                    marker: marker,
+                });
+            });
 
-
-
-
-
-    
-var addressPoints = [
-    [-27.49626, 153.01302], // uq
-    [-27.496265, 153.0131], // uq
-    [-27.496262, 153.01303], // uq
-
-    [-27.4854, 152.993], // toowong train station
-
-    [-27.486, 152.95], // mount coot tha
-
-    [-27.484, 153.026],  // queensland children hospital
-
-    [-27.47043, 153.0255], // uptown brisbane
-    [-27.47052, 153.02549], // uptown brisbane
-    [-27.47052, 153.0254], // uptown brisbane
-    [-27.4705, 153.0255], // uptown brisbane
-    [-27.47042, 153.0257], // uptown brisbane
-    [-27.47041, 153.0259], // uptown brisbane
-    [-27.47042, 153.0254], // uptown brisbane
-    [-27.4704, 153.026], // uptown brisbane, that one pin further right
-
-    [-27.4712, 153.02542], // elizabeth house
-    [-27.4713, 153.02532], // elizabeth house
-    [-27.47132, 153.02545], // elizabeth house
-    [-27.4718, 153.02531], // elizabeth house
-]
-
-var markers = L.markerClusterGroup();
-
-for (var i = 0; i < addressPoints.length; i++) {
-    var a = addressPoints[i];
-    var marker = L.marker(new L.LatLng(a[0], a[1]));
-    markers.addLayer(marker);
-    // markers.bindPopup('Location: Brisbane CBD<br> News Title: New Uncle Roger restaurant opening')
-    // markers.openPopup();
+            map.addLayer(markersClusterGroup);
+        })
+        .catch((error) => console.error("Error loading data:", error));
 }
 
-map.addLayer(markers);
+// Function to handle the user's location and detect nearby markers
+function detectNearbyMarkers(event) {
+    const userLatLng = event.latlng; // Use event.latlng to get the user's location
+
+    // Loop through the markers and check distance from the user's location
+    leafletMarkers.forEach(function (markerData) {
+        const markerLatLng = L.latLng(markerData.lat, markerData.lng);
+        const distance = userLatLng.distanceTo(markerLatLng);
+
+        if (distance <= distanceThreshold) {
+            console.log(`Nearby: ${markerData.id} at ${distance.toFixed(0)} meters`);
+        }
+    });
+}
+
+// Use map.locate to get the user's current position
+map.locate({
+    setView: true, // Automatically center the map on the user's location
+    maxZoom: 16, // Set the zoom level when user's location is found
+    watch: true, // Optionally watch the user's location for continuous updates
+    enableHighAccuracy: true, // Enable high accuracy if available
+});
+
+// When location is found, call the detectNearbyMarkers function
+map.on("locationfound", function (event) {
+    const userPosition = event.latlng;
+    L.marker(userPosition).addTo(map).bindPopup("You are here").openPopup();
+
+    // Add a circle around the user's location
+    L.circle(userPosition, {
+        color: 'blue',
+        fillColor: '#30f',
+        fillOpacity: 0.2,
+        radius: distanceThreshold
+    }).addTo(map);
+
+    // Detect nearby markers based on the user's current location
+    detectNearbyMarkers(event);
+});
+
+// Handle location errors
+map.on("locationerror", function (event) {
+    alert("Unable to retrieve your location. Error: " + event.message);
+});
+
+// Load the markers from the API
+loadMarkersFromAPI();

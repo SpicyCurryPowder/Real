@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "author": "April Glover",
+    "time": "2 min ago",
+    "imgSrc": "images/profile-6.jpg",
+    "newsImgSrc": "images/clinic_trial.jpg",
+    "ribbonType": "verified",
+    "title": "Combination flu and COVID-19 jab being trialled at Australian hospital",
+    "content": "A combined COVID-flu vaccine is being trialled for patients who can't have the traditional COVID-19 jab. Researchers at Mater Hospital Brisbane are leading the clinical trial of a protein-based jab in what would be an Australia-first if it became widely available. Brisbane woman Frances Nilson, 74, agreed to be part of the trial because of her passion for science and the real-world success of vaccinations.",
+    "coordinates": [-27.485, 153.02801]
+  },
+  {
+    "id": 2,
+    "author": "April Glover",
+    "time": "12 min ago",
+    "imgSrc": "images/profile-6.jpg",
+    "newsImgSrc": "images/qantas.jpg",
+    "ribbonType": "verified",
+    "title": "Over 1000 Qantas workers to strike during peak hour flights today",
+    "content": "Airports and travellers are braced this morning for a major nationwide strike by Qantas workers. More than 1000 engineers are set to walk off the job in protest over wage negotiations, with peak-hour flights this morning set to be most impacted. The Qantas Engineers' Alliance said flights between 7am and 9am today at major capital city airports Sydney, Melbourne, Brisbane, Canberra, Perth and Adelaide could be affected during the stoppages.",
+    "coordinates": [-25.04681, 55.21928]
+  },
+  {
+    "id": 3,
+    "author": "Dana Lee",
+    "time": "1 hour ago",
+    "imgSrc": "images/profile-3.jpg",
+    "newsImgSrc": "images/hurricaneMilton.jpg",
+    "ribbonType": "unverified",
+    "title": "Weather Alert: Hurricane Approaching",
+    "content": "A powerful storm is set to hit the east coast. Preparations are underway.",
+    "coordinates": [27.2667, -82.5465]
+  },
+  {
+    "id": 4,
+    "author": "Alice Johnson",
+    "time": "2 hours ago",
+    "imgSrc": "images/profile-2.jpg",
+    "newsImgSrc": "images/vaccine.jpeg",
+    "ribbonType": "unverified",
+    "title": "Health News: New Vaccine Approved",
+    "content": "A new vaccine has been approved for public use, offering protection against the latest strain of the flu. ",
+    "coordinates": [-27.4858, 153.02819]
+  },
+  {
+    "id": 5,
+    "author": "Kelly Ray",
+    "time": "4 days ago",
+    "imgSrc": "images/profile-9.jpg",
+    "newsImgSrc": "images/conference.jpg",
+    "ribbonType": "fake",
+    "title": "UQ Innovates with New AI Research Centre",
+    "content": "The University of Queensland has launched a new AI Research Centre that aims to explore artificial intelligence’s impact on healthcare, education, and public services. The center will provide world-class facilities for AI research and collaborate with industry leaders to develop cutting-edge AI technologies that will transform sectors globally.",
+    "coordinates":  [-27.4974, 153.0104]
+  },
+  {
+    "id": 6,
+    "author": "Evelyn Harris",
+    "time": "8 hours ago",
+    "imgSrc": "images/profile-4.png",
+    "newsImgSrc": "images/blockbuster.jpg",
+    "ribbonType": "fake",
+    "title": "Hollywood's Biggest Blockbuster Breaks Box Office Records",
+    "content": "Hollywood's latest blockbuster, Galactic Wars: The Final Battle, has shattered box office records on its opening weekend. The film, directed by visionary filmmaker Maria Johnson, has earned over $500 million globally, surpassing expectations and setting a new benchmark for the industry. With stunning visual effects, a star-studded cast, and an epic storyline, the film has quickly become a fan favorite. Experts predict it will dominate the charts for months to come and could even compete for several Academy Awards next year",
+    "coordinates": [-27.3891, 153.0128]
+  },
+  {
+    "id": 7,
+    "author": "Sawyer Harris",
+    "time": "4 days ago",
+    "imgSrc": "images/profile-8.jpg",
+    "newsImgSrc": "images/conference.jpg",
+    "ribbonType": "unverified",
+    "title": "UQ Hosts Annual Sustainability Conference",
+    "content": "The University of Queensland (UQ) recently hosted its Annual Sustainability Conference, bringing together thought leaders, environmental advocates, and policy makers to discuss innovative solutions for addressing climate change. The conference featured keynotes on renewable energy, waste management, and sustainable urban planning, highlighting UQ's commitment to a sustainable future.",
+    "coordinates": [-27.497, 153.0101]
+  },
+  {
+    "id": 8,
+    "author": "Pedro Olson",
+    "time": "2 days ago",
+    "imgSrc": "images/profile-10.jpg",
+    "newsImgSrc": "images/mentalhealth.jpg",
+    "ribbonType": "unverified",
+    "title": "Student-led Initiative at UQ Promotes Mental Health Awareness",
+    "content": "A new student-led initiative at UQ is making waves across campus by focusing on mental health awareness and well-being. The \"Mind Matters\" campaign aims to reduce stigma, promote mental health resources, and foster a more supportive environment for students. The campaign includes workshops, events, and resources that encourage open discussions on mental health",
+    "coordinates": [-27.4982, 153.0129]
+  },
+  {
+    "id": 9,
+    "author": "Allison Granger",
+    "time": "6 days ago",
+    "imgSrc": "images/profile-8.jpg",
+    "newsImgSrc": "images/uq_new_1.jpg",
+    "ribbonType": "verified",
+    "title": "Aussie avocado technology to hit Latin America",
+    "content": "A team led by Professor Neena Mitter at UQ’s Queensland Alliance for Agriculture and Food Innovation developed the technology and it was licensed to the Chilean nursery Grupo Hijuelas by UniQuest, UQ’s commercialisation company. UQ’s Dr Chris O’Brien said the technology would speed up the production of 4 key avocado rootstocks in the region.",
+    "coordinates": [-27.49821, 153.01024]
+  },
+  {
+    "id": 10,
+    "author": "Alice Johnson",
+    "time": "8 hours ago",
+    "imgSrc": "images/profile-2.jpg",
+    "newsImgSrc": "images/vaccine.jpg",
+    "ribbonType": "verified",
+    "title": "New Vaccine Shows Promise in Fighting Latest Flu Strain",
+    "content": "A new flu vaccine developed by researchers at the Mater Hospital Brisbane has shown promising results in early clinical trials. Patients who can't have the traditional flu or COVID-19 jab will soon be able to receive this protein-based jab when clinical trials have been concluded.",
+    "coordinates": [-27.485, 153.02801]
+  },
+  {
+    "id": 11,
+    "author": "Josh Hohne",
+    "time": "4 days ago",
+    "imgSrc": "images/profile-8.jpg",
+    "newsImgSrc": "images/fire.jpg",
+    "ribbonType": "verified",
+    "title": "Fire rips through high-end Brisbane wedding venue, leaving one fighting for life",
+    "content": "A massive fire has torn through multiple buildings in inner-city Brisbane, leaving one person fighting for life and collapsing the roof of a high-end wedding venue, leaving organisers rushing to organise backups. More than a dozen fire crews battled the flames for hours on Hubert Street, Woolloongabba, as thick black smoke billowing into the air forced police to declare an emergency exclusion area taking in several surrounding streets, including the busy Stanley Street. The fire started about 4.30pm yesterday, the emergency warning was issued about 40 minutes later and wasn't lifted until 10.45pm, police said.",
+    "coordinates": [-27.4868, 153.0341]
+  },
+  {
+    "id": 12,
+    "author": "Jo Mccoy",
+    "time": "4 days ago",
+    "imgSrc": "images/profile-7.jpg",
+    "newsImgSrc": "images/conference.jpg",
+    "ribbonType": "unverified",
+    "title": "UQ Medical School Receives Prestigious International Accreditation",
+    "content": "The University of Queensland’s Medical School has received a prestigious international accreditation for its excellence in medical education and research. This recognition places UQ among the top medical institutions globally, ensuring that its graduates are equipped with the knowledge and skills required to excel in the healthcare industry worldwide.",
+    "coordinates":  [-27.4958, 153.0083]
+  },
+  {
+    "id": 13,
+    "author": "Alice Johnson",
+    "time": "4 hours ago",
+    "imgSrc": "images/profile-2.jpg",
+    "newsImgSrc": "images/soccer.jpg",
+    "ribbonType": "fake",
+    "title": "New AI-Powered Smartphone Revolutionizes Mobile Photography",
+    "content": "Tech enthusiasts are abuzz with the release of the new SmartPhone X5, which comes equipped with a revolutionary AI-powered camera. This latest innovation promises to capture professional-grade photos with ease, thanks to its advanced image processing algorithms. With features like real-time background enhancement and 3D object recognition, the SmartPhone X5 is expected to be a game-changer in mobile photography. Industry experts believe this will set a new standard for smartphones, and tech critics are already calling it the most advanced camera phone of the year.",
+    "coordinates": [-27.4705, 153.026]
+  }
+]

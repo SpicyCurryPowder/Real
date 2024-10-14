@@ -13,11 +13,8 @@
         <h1 class="logo">Real
             <img src="/images/green_circle.png">
         </h1> 
-        <div class="settings">        
-            <img src="/images/settings.png">
-        </div>
-
     </header>
+
     <div class="search-container">
         <div class="search-wrapper">
             <i class="fas fa-search search-icon"></i>
@@ -51,13 +48,13 @@
         <h1 class="feed-title">News feed</h1>
         <div class="news-container">
             <% newsList.forEach(function(newsItem) { %>
-                <article class="news-item" id=<%= newsItem.id %>>
+                <article class="news-item" id="news-<%= newsItem.id %>" data-id="<%= newsItem.id %>">
                     <div class="ribbon <%= newsItem.ribbonType %>">
                         <%= newsItem.ribbonType.charAt(0).toUpperCase() + newsItem.ribbonType.slice(1) %>
                     </div>
                     <div class="news-top">
                         <div class="profile-pic">
-                            <img src=<%=newsItem.imgSrc %>> // need to change this profile picture out
+                            <img src=<%=newsItem.imgSrc %>> 
                         </div>
                         <span class="user-name">
                             <%= newsItem.author %>
@@ -79,19 +76,22 @@
                         <p>
                             <%= newsItem.content %>
                         </p>
-                        <!-- <button onclick="" class="verify-btn">
-                            Verify
-                        </button> -->
-                        
                     </div>
                 </article>
                 <% }); %>
         </div>
-        </div>
     </main>
 
-    <script src="/js/handler.js"></script>
 
+    <script>
+        // Add click event listener to each news item
+        document.querySelectorAll('.news-item').forEach(function (newsItem) {
+            newsItem.addEventListener('click', function () {
+                const newsId = this.getAttribute('data-id');  // Get the news item ID
+                window.location.href = `/post/${newsId}`;     // Redirect to the news post page
+            });
+        });
+    </script>
 
     <nav class="bottom-nav">
         <a href="/">
@@ -102,10 +102,10 @@
             <div class="nav-icon"><img src="/vectors/verified-icon.svg"></div>
             <span>Verified News</span>
         </a>
-        <!-- <a href="/map">
+        <a href="/map">
             <div class="nav-icon"><img src="/vectors/map.svg"></div>
             <span>Map</span>
-        </a> -->
+        </a>
     </nav>
 </nav>
 </body>
