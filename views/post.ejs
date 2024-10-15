@@ -18,11 +18,18 @@
 
 <body>
     <header>
-        <h1 class="logo">Real
-            <img src="/images/green_circle.png">
-        </h1>
+        <div class="m-line">
+            <img src="/images/Line.png">
+        </div>
+        <div class="filter">
+            <img src="/images/share.png">
+        </div>
+
     </header>
     <main>
+        <h1 class="location"> Post location</h1>
+        <h1 class="address"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <br>
         <div class="image-tile-container">
             <!-- Image Section -->
             <img src="../<%= post.newsImgSrc %>" alt="Article Image" class="full-width-image">
@@ -35,7 +42,7 @@
                 <span class="label"><%= post.ribbonType %></span>
             </div>
         </div>
-
+        <br>
         <div class="user-info-container">
             <div class="user-profile">
                 <img src="../<%= post.imgSrc %>" alt="User Profile" class="profile-pic">
@@ -49,24 +56,12 @@
             </a>
         </div>
 
-        <h4 class="heading-heat">News Interaction Heatmap: <span class="secondary-text">See How Users Engage</span></h4>
+        <h4 class="heading-heat"><span class="secondary-text">See How Users Engage</span></h4>
         <div id="map" style="height: 60vh; margin: 2rem; z-index: -10;"></div>
         <div id="location-not-available" style="text-align:center; background-color: lightgrey; height: 60vh; margin: 2rem; display: none;">Location not available</div>
-
-
-
         <p class="para">
             <%= post.content %>
         </p>
-        <div class="disclaimer">
-            <h5>Our terms & conditions:</h5>
-            <p>
-                All posts will have appropriate citations to verify the content and go through first-hand AI
-                verification. Posts can be turned unverified or marked as missing sources when identified and labeled as
-                fake if proven false with evidence. Users who make abusive claims will be removed from the community
-                after a warning.
-            </p>
-        </div>
     </main>
 
 
@@ -105,7 +100,7 @@
             <span>Home</span>
         </a>
         <a href="/verified-news" class="active">
-            <div class="nav-icon"><img src="/vectors/verified-icon.svg"></div>
+            <div class="nav-icon"><img src="/images/verify.png"></div>
             <span>Verified News</span>
         </a>
         <a href="/map">
@@ -113,6 +108,33 @@
             <span>Map</span>
         </a>
     </nav>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="disclaimer">
+                <h2>Terms and Conditions for Posted News Content</h2>
+                <br>
+                <p>
+                - All posts are subject to verification, and users should cite reliable sources for their claims. AI verification methods are utilized to assess content credibility.
+                <br>
+                - Users must adhere to ethical standards by respecting intellectual property, avoiding plagiarism, and ensuring their content is neither misleading nor harmful; defamatory statements, hate speech, or any content inciting violence or discrimination are strictly prohibited.
+                <br>
+                - We reserve the right to review, modify, or remove posts that violate our guidelines, and unverified or misleading content may be marked or removed.
+                <br>
+                - Users are responsible for their uploads, and false claims or unethical behavior may lead to warnings or removal, with repeated violations resulting in account suspension or termination.
+                <br>
+                - Users can report content that appears inaccurate or harmful, and all reports will be reviewed.
+                <br>
+                - Do not post private or confidential information without consent, and handle personal data in accordance with applicable laws.
+                <br>
+                <br>
+                These terms may change, and users will be notified of significant updates via the app; continued use indicates acceptance of any modifications.
+                </p>
+            </div>
+    
+            <p>&copy; 2024 Real. All rights reserved.</p>
+            <p>Team: Curry Powder</p>
+        </div>
+    </footer>    
 </body>
 
 </html>

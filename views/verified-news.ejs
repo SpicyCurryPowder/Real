@@ -10,13 +10,16 @@
 
 <body>
     <header>
-        <h1 class="logo">Real
-            <img src="/images/green_circle.png">
-        </h1>
+        <div class="line">
+            <img src="/images/Line.png">
+        </div>
+        <div class="filter">
+            <img src="/images/filter.png">
+        </div>
     </header>
     <main>
         <h1 class="location">Your current location</h1>
-        <h1 class="address"><img src="/images/landmark.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <h1 class="address"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
         <br>
         <h1 class="live">LIVE<span class="reddot"> • </span><span class="update">Update</span></h1>
         <!-- Scrollable Circles for Live Updates -->
@@ -84,6 +87,22 @@
                                 </button> -->
         
                     </div>
+                    <div class="news-actions">
+                        <button class="likes-btn">
+                            <img src="images/like.png" alt="20">
+                            <span><%= newsItem.likes %>Likes</span>
+                        </button>
+                        <button class="comment-btn">
+                            <img src="images/comment.png" alt="Comment">
+                            <span><%= newsItem.commentsCount %>300</span>
+                        </button>
+                        <button class="share-btn">
+                            <img src="images/share-b.png" alt="Share">
+                            <span>Share</span>
+                        </button>
+                    </div>
+                    <button class="a-verify-btn">Verify</button>
+
                 </article>
                 <% } }); %>
         </div>
@@ -95,7 +114,7 @@
             <span>Home</span>
         </a>
         <a href="/verified-news" class="active">
-            <div class="nav-icon"><img src="/vectors/verified-icon.svg"></div>
+            <div class="nav-icon"><img src="/images/verify.png"></div>
             <span>Verified News</span>
         </a>
         <a href="/map">
@@ -103,14 +122,11 @@
             <span>Map</span>
         </a>
     </nav>
-    <footer></footer>
-    <div class="footer-container">
-        <p>&copy; 2024 REAL.</p>
-        <div class="footer-links">
-            <a href="#">Team Curry Powder</a>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Real. All rights reserved.</p>
+            <p>Team: Curry Powder</p>
         </div>
-    </div>
-    </footer>
+    </footer>    
 </body>
-
 </html>

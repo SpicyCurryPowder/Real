@@ -13,6 +13,9 @@
         <h1 class="logo">Real
             <img src="/images/green_circle.png">
         </h1> 
+        <div >
+            <img class="settings" src="/images/setting.png" alt="">
+        </div>
     </header>
 
     <div class="search-container">
@@ -25,7 +28,7 @@
     <main>
         <h1 class="hello">Hello John!</h1>
         <h1 class="location">Your current location</h1>
-        <h1 class="address"><img src="/images/landmark.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <h1 class="address"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
         <button class="add-news-button">+ Add News</button>
         <h1 class="trending-title">Trending updates in your area</h1>
         <div class="scroll-container"> <!-- Scrollable container -->
@@ -40,7 +43,7 @@
                     <div class="news-content">
                         <h3 class="heading">Lorem Ipsum Dolor Sit Amet <%= i %></h3>
                         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <h1 class="address-small"><img src="/images/landmark.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+                        <h1 class="address-small"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
                     </div>
                 </article>
             <% } %>
@@ -77,6 +80,21 @@
                             <%= newsItem.content %>
                         </p>
                     </div>
+                    <div class="news-actions">
+                        <button class="likes-btn">
+                            <img src="images/like.png" alt="20">
+                            <span><%= newsItem.likes %>Likes</span>
+                        </button>
+                        <button class="comment-btn">
+                            <img src="images/comment.png" alt="Comment">
+                            <span><%= newsItem.commentsCount %>300</span>
+                        </button>
+                        <button class="share-btn">
+                            <img src="images/share-b.png" alt="Share">
+                            <span>Share</span>
+                        </button>
+                    </div>
+                    <button class="a-verify-btn">Verify</button>
                 </article>
                 <% }); %>
         </div>
@@ -99,7 +117,7 @@
             <span>Home</span>
         </a>
         <a href="/verified-news" class="active">
-            <div class="nav-icon"><img src="/vectors/verified-icon.svg"></div>
+            <div class="nav-icon"><img src="/images/verify.png"></div>
             <span>Verified News</span>
         </a>
         <a href="/map">
@@ -108,5 +126,11 @@
         </a>
     </nav>
 </nav>
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2024 Real. All rights reserved.</p>
+        <p>Team: Curry Powder</p>
+    </div>
+</footer>
 </body>
 </html>

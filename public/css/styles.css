@@ -46,7 +46,7 @@ header {
     align-items: center;
     background-color: #3188BF;
     color: #fff;
-    padding: 0.3rem 20px;
+    padding: 0.1rem 20px;
 }
 
 main {
@@ -67,6 +67,16 @@ main {
     padding-top: 8px;
     vertical-align: middle;
 }
+
+.settings {
+    align-items: flex-end;
+}
+
+.settings img {
+    width: 5px;
+
+}
+
 
 .tiles-container {
     display: flex;
@@ -110,25 +120,28 @@ main {
 }
 
 .disclaimer {
-    border-radius: 10px;
-    border-top: 1px solid #ccc;
-    padding: 6px;
-    margin-top: 10px;
+    padding: 12px;
     text-align: left;
     font-weight: lighter;
-    background-color: #d6d6d6;
+    color: white;
+    font-size: 11px;
+    
 }
 
 .disclaimer h2 {
     font-weight: lighter;
-    color: #6f6f6f;
+    color: #ffffff;
     margin: 0;
+
 }
 
 .disclaimer p {
-    font-size: 14px;
+    font-size: 11.5px;
     text-align: left;
     font-weight: lighter;
+    border-bottom: white;
+    margin-bottom: 10px;
+
 }
 
 .full-width-image {
@@ -243,8 +256,8 @@ main {
 
 .search-button {
     padding: 10px 20px;
-    background-color: #ffffff;
-    color: #5f5f5f;
+    background-color: #16498C;
+    color: #ffffff;
     border-radius: 0 17px 17px 0;
     cursor: pointer;
     font-size: 16px;
@@ -372,7 +385,7 @@ main {
 
 .live-news-container {
     display: flex;
-    overflow-x: auto;
+    overflow-y: auto;
     padding-top: 10px;
 }
 
@@ -537,6 +550,7 @@ main {
     border-radius: 5px;
     align-self: flex-end;
     transition: background-color 0.3s ease;
+    margin-left: 26px;
 }
 
 .verify-btn:hover {
@@ -548,6 +562,36 @@ main {
 .verify-btn.liked {
     background-color: #f44336;
 }
+
+
+.a-verify-btn {
+    background-color: #ffffff;
+    border: none;
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    align-self: flex-end;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.a-verify-btn:hover {
+    background-color: #16498C;
+    color: white;
+    border: black;
+}
+
+.a-verify-btn.liked {
+    background-color: #f44336;
+}
+
 
 
 .bottom-nav {
@@ -596,6 +640,99 @@ main {
 .bottom-nav span {
     font-size: 0.8rem;
 }
+
+.news-actions {
+    display: flex;
+    align-items: left;
+    gap: 40px; 
+    margin-left: 20px;
+}
+
+.news-actions button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0; /* Remove margin around buttons */
+    cursor: pointer;
+}
+
+.news-actions img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px; /* Adjust as needed for text spacing */
+}
+
+.news-actions span {
+    font-size: 14px;
+    color: #333;
+}
+
+.footer {
+    background-color: #3f3f3f; 
+    padding: 20px;
+    text-align: center;
+    position: relative; 
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.footer-content p {
+    margin: 0;
+    color: #c8c8c8; /* Dark gray text color */
+    font-family: 'Roboto', sans-serif; /* Use the same font */
+}
+
+.line img {
+    width: 40px;
+    margin-left: 18px;
+    height: auto;
+
+}
+
+.update {
+    color: rgb(0, 0, 0); 
+    font-family: Arial;
+    font-weight: lighter; 
+    font-size: 12px;
+}
+
+.filter {
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.filter img{
+    width: 30px;
+}
+
+.m-line{
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.m-line img{
+    width: 30px;
+}
+
+.tile-heading {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.date-time {
+    font-size: 14px;
+}
+
+.heading-heat {
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
