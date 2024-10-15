@@ -13,9 +13,9 @@
         <h1 class="logo">Real
             <img src="/images/green_circle.png">
         </h1> 
-        <div >
-            <img class="settings" src="/images/setting.png" alt="">
-        </div>
+        <a href="/settings">
+            <div ><img class="settings" src="/images/setting.png" alt=""></div>
+        </a>
     </header>
 
     <div class="search-container">
@@ -29,7 +29,90 @@
         <h1 class="hello">Hello John!</h1>
         <h1 class="location">Your current location</h1>
         <h1 class="address"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
-        <button class="add-news-button">+ Add News</button>
+        <!--This is the section for add news form-->
+        <button class="add-news-button" onclick="openForm()">+ Add News</button>
+        <!-- Form Modal -->
+        <div id="newsFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeForm()">&times;</span>
+                <form>
+                    <h2>New Post</h2>
+                    <!-- Enable Live Location -->
+                    <label>
+                        <input type="checkbox" name="enableLiveLocation" id="enableLiveLocation"> Enable Live Location
+                    </label><br>
+
+                    <!-- Main Heading -->
+                    <label for="mainHeading">Main Heading:</label>
+                    <input type="text" name="mainHeading" id="mainHeading" required><br>
+
+                    <!-- Add Location -->
+                    <label for="location">Add Location:</label>
+                    <input type="text" name="location" id="location"><br>
+
+                    <!-- Add Image -->
+                    <label for="image">Add Image:</label>
+                    <input type="file" name="image" id="image"><br>
+
+                    <!-- Thumbnail Image -->
+                    <label for="thumbnailImage">Thumbnail Image:</label>
+                    <input type="file" name="thumbnailImage" id="thumbnailImage"><br>
+
+                    <!-- Report Section -->
+                    <label for="report">Report:</label>
+                    <textarea name="report" id="report" rows="4"></textarea><br>
+
+                    <!-- Sources Section -->
+                    <fieldset>
+                        <legend>Sources</legend>
+                        
+                        <!-- Add Multiple Images -->
+                        <label for="additionalImages">Additional Images:</label>
+                        <input type="file" name="additionalImages" id="additionalImages" multiple><br>
+
+                        <!-- Add Report -->
+                        <label for="additionalReport">Additional Report:</label>
+                        <input type="file" name="additionalReport" id="additionalReport"><br>
+
+                        <!-- Add Links (Optional) -->
+                        <label for="links">Add Links (Optional):</label>
+                        <input type="url" name="links" id="links"><br>
+
+                        <!-- Add Video (Optional) -->
+                        <label for="video">Add Video (Optional):</label>
+                        <input type="file" name="video" id="video" accept="video/*"><br>
+
+                        <!-- Citation -->
+                        <label for="citation">Citation:</label>
+                        <textarea name="citation" id="citation" rows="2"></textarea>
+                    </fieldset>
+
+                    <!-- Submit Button -->
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            // Open the form modal
+            function openForm() {
+                console.log("Opening form");
+                document.getElementById("newsFormModal").style.display = "block";
+            }
+        
+            // Close the form modal
+            function closeForm() {
+                console.log("Closing form");
+                document.getElementById("newsFormModal").style.display = "none";
+            }
+        
+            // Close the form when clicking outside of it
+            window.onclick = function(event) {
+                const modal = document.getElementById("newsFormModal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
         <h1 class="trending-title">Trending updates in your area</h1>
         <div class="scroll-container"> <!-- Scrollable container -->
             <% for(let i = 1; i <= 6; i++) { %>
@@ -132,5 +215,6 @@
         <p>Team: Curry Powder</p>
     </div>
 </footer>
+<script src="script.js"></script>
 </body>
 </html>

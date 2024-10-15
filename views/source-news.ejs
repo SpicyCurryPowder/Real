@@ -21,16 +21,106 @@
         <br>
 
         <div class="tiles-container">
-            <div class="tile">
+            <div class="tile" id="addSourcesButton" onclick="openForm()">
                 <span class="tile-text">+ Add Sources</span>
             </div>
-            <div class="tile">
+            <div class="tile" id="flagTile">
                 <span class="tile-text">Flag</span>
                 <img class="flag" src="/images/flag.png" alt="">
             </div>
         </div>
         <br>
+        <div id="newsFormModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeForm()">&times;</span>
+                <form>
+                    <h2>Add sources</h2>
+        
+                    <!-- Main Heading -->
+                    <label for="mainHeading">Main Heading:</label>
+                    <input type="text" name="mainHeading" id="mainHeading" required><br>
+        
+                    <!-- Add Location -->
+                    <label for="location">Add Location:</label>
+                    <input type="text" name="location" id="location"><br>
+        
+                    <!-- Sources Section -->
+                    <fieldset>
+                        <legend>Sources</legend>
+        
+                        <!-- Add Multiple Images -->
+                        <label for="additionalImages">Additional Images:</label>
+                        <input type="file" name="additionalImages" id="additionalImages" multiple><br>
+        
+                        <!-- Add Report -->
+                        <label for="additionalReport">Additional Report:</label>
+                        <input type="file" name="additionalReport" id="additionalReport"><br>
+        
+                        <!-- Add Links (Optional) -->
+                        <label for="links">Add Links (Optional):</label>
+                        <input type="url" name="links" id="links"><br>
+        
+                        <!-- Add Video (Optional) -->
+                        <label for="video">Add Video (Optional):</label>
+                        <input type="file" name="video" id="video" accept="video/*"><br>
+        
+                        <!-- Citation -->
+                        <label for="citation">Citation:</label>
+                        <textarea name="citation" id="citation" rows="2"></textarea>
+                    </fieldset>
+        
+                    <!-- Submit Button -->
+                    <button type="submit">Submit</button>
+                </form>
+            </div> 
+        </div>
+        <script>
+            // Open the form modal
+            function openForm() {
+                console.log("Opening form");
+                document.getElementById("newsFormModal").style.display = "block";
+            }
+        
+            // Close the form modal
+            function closeForm() {
+                console.log("Closing form");
+                document.getElementById("newsFormModal").style.display = "none";
+            }
+        
+            // Close the form when clicking outside of it
+            window.onclick = function(event) {
+                const modal = document.getElementById("newsFormModal");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
 
+        <div class="popup" id="flagReasonPopup">
+            <div class="popup-content">
+                <h4>Choose reason to flag</h4>
+                <button onclick="flagReason('not relevant')">Not Relevant</button>
+                <button onclick="flagReason('misleading')">Misleading</button>
+                <button onclick="flagReason('not true')">Not True</button>
+                <button onclick="flagReason('report')">Report</button>
+                <button class="cancel-button" onclick="closePopup()">Cancel</button> <!-- Added class for styling -->
+            </div>
+        </div>
+    
+        <script>
+            document.getElementById('flagTile').addEventListener('click', function() {
+                document.getElementById('flagReasonPopup').style.display = 'block'; // Show popup
+            });
+    
+            function closePopup() {
+                document.getElementById('flagReasonPopup').style.display = 'none'; // Hide popup
+            }
+    
+            function flagReason(reason) {
+                console.log('Flagged as:', reason); // Process the flag reason
+                closePopup(); // Close the popup after selection
+            }
+        </script>
         <h1 class="feed-title">Combination flu and COVID-19 jab being trialled at Australian hospital</h1>
         <p>Sources</p>
         <div class="news-container">
@@ -114,6 +204,7 @@
                             </div>
                         </article>
         </div>
+    
         <br>
     </main>
     <footer class="footer">

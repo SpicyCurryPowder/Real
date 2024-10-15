@@ -49,6 +49,11 @@ app.get('/map', (req, res) => {
     res.render('map', { newsList });
 });
 
+app.get('/settings', (req, res) => {
+    res.render('settings', { newsList });
+});
+
+
 // Route to show individual post based on postId
 app.get('/post/:id', (req, res) => {
     const postId = parseInt(req.params.id);
@@ -137,3 +142,4 @@ async function fetchVerifiedNews() {
 app.listen(port, () => {
     console.log(`News aggregator app listening at http://localhost:${port}`);
 });
+
