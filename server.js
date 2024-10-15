@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 // Set up Multer storage configuration for image uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // Define the folder to store images
+        cb(null, 'public/images'); // Define the folder to store images
     },
     filename: (req, file, cb) => {
         // Use original filename or generate a unique one
@@ -37,7 +37,6 @@ const upload = multer({ storage: storage });
 // In-memory storage for liked news (replace with a database in a real application)
 let likedNews = [];
 const dataFilePath = path.join(__dirname, 'data.json');
-const dataJSON = require('./data.json');
 
 // Home page route (web-scraped news)
 app.get('/', async (req, res) => {
@@ -53,15 +52,18 @@ app.get('/', async (req, res) => {
 
 // POST route to handle form submission (including file upload)
 app.post('/', upload.single('thumbnail'), (req, res) => {
-    const { heading, location, content } = req.body;
+    const { author, heading, content, coordinates } = req.body;
     const thumbnail = req.file;
 
     // Check if all required fields are provided
-    if (!heading || !location || !content || !thumbnail) {
+    if (!author || !heading || !content || !thumbnail || !coordinates) {
         return res.render('home', {
-            errorMessage: 'All fields (heading, location, content, and thumbnail) are required.'
+            errorMessage: 'All fields (author, heading, content, coordinates and thumbnail) are required.'
         });
     }
+
+    // Parse the coordinates into an array
+    const coords = JSON.parse(coordinates);
 
     // Read the current data from data.json
     const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
@@ -73,14 +75,14 @@ app.post('/', upload.single('thumbnail'), (req, res) => {
     // Create a new post object
     const newPost = {
         id: newPostId,
-        author: 'Unknown Author',  // You can customize this to get the author from the form
+        author: author,  // You can customize this to get the author from the form
         time: 'Just Now',  // You can set this based on the submission time or get it from the form
         imgSrc: 'images/profile-unknown.jpg',  // You can allow users to upload an avatar image or set a default
-        newsImgSrc: `/uploads/${thumbnail.filename}`,  // Path to the uploaded thumbnail image
+        newsImgSrc: `/public/images/${thumbnail.filename}`,  // Path to the uploaded thumbnail image
         ribbonType: 'unverified',  // Default or based on user input
         title: heading,
         content: content,
-        coordinates: []  // You can allow users to enter coordinates or fetch them based on location
+        coordinates: coords  // You can allow users to enter coordinates or fetch them based on location
     };
 
     // Add the new post to the beginning of the list (at index 0)
@@ -89,13 +91,12 @@ app.post('/', upload.single('thumbnail'), (req, res) => {
     // Sort the newsList by id in descending order (largest to smallest)
     const sortedNewsList = newsList.sort((a, b) => b.id - a.id);
 
-
     // Write the updated news list back to data.json
-    fs.writeFileSync(dataFilePath, JSON.stringify(newsList, null, 2), 'utf8');
+    fs.writeFileSync(dataFilePath, JSON.stringify(sortedNewsList, null, 2), 'utf8');
 
     // Redirect to the homepage with a success message
     res.render('home', {
-        newsList,
+        newsList: sortedNewsList,
         successMessage: 'Post submitted successfully!',
         errorMessage: null  // Clear any error messages
     });
@@ -103,7 +104,7 @@ app.post('/', upload.single('thumbnail'), (req, res) => {
 
 
 // Serve the uploaded image files as static
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/public/images', express.static(path.join(__dirname, 'public/images')));
 
 
 app.get('/newspage-unverified', (req, res) => {
@@ -119,23 +120,28 @@ app.get('/source-news', (req, res) => {
 });
 
 app.get('/verified-news', (req, res) => {
-    res.render('verified-news', { dataJSON });
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));  // Read the news from data.json
+    res.render('verified-news', { newsList });
 });
 
+// START JOJO
 app.get('/map', (req, res) => {
-    res.render('map', { dataJSON });
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));  // Read the news from data.json
+    res.render('map', { newsList });
 });
 
-app.get('/settings', (req, res) => {
-    res.render('settings', { dataJSON });
+// Serve data.json file via an API endpoint
+app.get('/api/data', (req, res) => {
+    // const data = require('./data.json'); // Synchronously load the JSON data
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));  // Read the news from data.json
+    res.json(newsList); // Send the data as JSON in the response
 });
-
 
 // Route to show individual post based on postId
 app.get('/post/:id', (req, res) => {
     const postId = parseInt(req.params.id);
-    // console.log(postId);
-    const post = dataJSON.find(p => p.id === postId);
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+    const post = newsList.find(p => p.id === postId);
 
     if (!post) {
         return res.status(404).send('Post not found');
@@ -143,16 +149,20 @@ app.get('/post/:id', (req, res) => {
 
     res.render('post', { post });
 });
+// END JOJO
+
+app.get('/settings', (req, res) => {
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));  // Read the news from data.json
+    res.render('settings', { newsList });
+});
+
 
 app.get('/locations', (req, res) => {
-    res.json(dataJSON);
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));  // Read the news from data.json
+    res.json(newsList);
 });
 
-// Serve data.json file via an API endpoint
-app.get('/api/data', (req, res) => {
-    const data = require('./data.json'); // Synchronously load the JSON data
-    res.json(data); // Send the data as JSON in the response
-});
+
 
 // Like/unlike news route
 app.post('/toggle-like/:id', express.json(), (req, res) => {

@@ -48,8 +48,8 @@
                 <img src="../<%= post.imgSrc %>" alt="User Profile" class="profile-pic">
             </div>
             <div class="user-details">
-                <span class="user-name">John Doe</span>
-                <span class="date-time">October 14, 2024 | 10:00 AM</span>
+                <span class="user-name"><%= post.author %></span>
+                <span class="date-time"><%= post.time %></span>
             </div>
             <a href="/source-news" class="verify-btn">
                 Verify

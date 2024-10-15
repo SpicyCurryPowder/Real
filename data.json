@@ -1,16 +1,5 @@
 [
   {
-    "id": 14,
-    "author": "Unknown Author",
-    "time": "Just Now",
-    "imgSrc": "images/profile-unknown.jpg",
-    "newsImgSrc": "/uploads/1728998856461.png",
-    "ribbonType": "unverified",
-    "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaagh",
-    "content": "aaaaaaaaaaaaa",
-    "coordinates": []
-  },
-  {
     "id": 13,
     "author": "Alice Johnson",
     "time": "12 minutes ago",
@@ -29,7 +18,7 @@
     "author": "Jo Mccoy",
     "time": "2 hours ago",
     "imgSrc": "images/profile-7.jpg",
-    "newsImgSrc": "images/conference.jpg",
+    "newsImgSrc": "images/uqAccredit.jpg",
     "ribbonType": "unverified",
     "title": "UQ Medical School Receives Prestigious International Accreditation",
     "content": "The University of Queensland’s Medical School has received a prestigious international accreditation for its excellence in medical education and research. This recognition places UQ among the top medical institutions globally, ensuring that its graduates are equipped with the knowledge and skills required to excel in the healthcare industry worldwide.",
@@ -127,7 +116,7 @@
     "author": "Kelly Ray",
     "time": "2 days ago",
     "imgSrc": "images/profile-9.jpg",
-    "newsImgSrc": "images/conference.jpg",
+    "newsImgSrc": "images/uq.jpg",
     "ribbonType": "fake",
     "title": "UQ Innovates with New AI Research Centre",
     "content": "The University of Queensland has launched a new AI Research Centre that aims to explore artificial intelligence’s impact on healthcare, education, and public services. The center will provide world-class facilities for AI research and collaborate with industry leaders to develop cutting-edge AI technologies that will transform sectors globally.",
