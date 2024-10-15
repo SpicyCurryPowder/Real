@@ -1,20 +1,3 @@
-// Initialize the map
-const map = L.map("map").setView([51.505, -0.09], 13); // Default to London for example
-
-// Add OpenStreetMap tiles to the map
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
-
-const markersClusterGroup = L.markerClusterGroup();
-const distanceThreshold = 1000; // 500 meters (adjust as necessary)
-let leafletMarkers = [];
-let APIdata = [];
-let nearbyMarkers = [];
-let nearbyPosts = [];
-
-
 // Function to load data from /api/data and add markers to the map
 async function loadMarkersFromAPI() {
     fetch("/api/data")
@@ -23,8 +6,7 @@ async function loadMarkersFromAPI() {
             data.forEach(function (markerData) {
                 const { id, author, time, imgSrc, newsImgSrc, ribbonType, title, content, coordinates } = markerData;
                 const marker = L.marker([coordinates[0], coordinates[1]])
-                    .bindPopup(`<b>${id}, ${title}</b>`)
-                    // .addTo(map);
+                    .bindPopup(`<b>${id}, ${title}</b>`);
 
                 markersClusterGroup.addLayer(marker);
 
@@ -40,11 +22,15 @@ async function loadMarkersFromAPI() {
             });
 
             map.addLayer(markersClusterGroup);
-            console.log(333, APIdata)
+            console.log("Loaded markers:", APIdata);
+
+            // Call detectNearbyMarkers right after loading markers
+            map.locate({ setView: true, maxZoom: 16, enableHighAccuracy: true });
         })
         .catch((error) => console.error("Error loading data:", error));
 }
-// Function to handle the user's location and detect nearby markers
+
+// Function to detect nearby markers (from your current location) and render posts
 async function detectNearbyMarkers(event) {
     const userLatLng = event.latlng; // Use event.latlng to get the user's location
 
@@ -53,54 +39,86 @@ async function detectNearbyMarkers(event) {
     nearbyPosts = [];
 
     // Loop through the markers and check distance from the user's location
-    if (nearbyMarkers.length == 0) {  // if nearbyMarkers list is empty
-        leafletMarkers.forEach(function (markerData) {
-            const markerLatLng = L.latLng(markerData.lat, markerData.lng);
-            const distance = userLatLng.distanceTo(markerLatLng);
+    leafletMarkers.forEach(function (markerData) {
+        const markerLatLng = L.latLng(markerData.lat, markerData.lng);
+        const distance = userLatLng.distanceTo(markerLatLng);
 
-            if (distance <= distanceThreshold) { // if marker is nearby
-                // console.log(`Nearby: ${markerData.id} at ${distance.toFixed(0)} meters`);
-                nearbyMarkers.push(markerData.id);
-            }
-        });
-        console.log("nearbyMarkers", nearbyMarkers);
-        nearbyMarkers.map((nearbyMarker) => {
-            const post = APIdata.find(newsItem => newsItem.id === nearbyMarker);
-            // console.log(11111111111111, post)
-            nearbyPosts.push(post);
-        })
-        console.log("nearbyPosts", nearbyPosts);
-    }
+        if (distance <= distanceThreshold) { // if marker is nearby
+            nearbyMarkers.push(markerData.id); // Store the ID of the nearby marker
+        }
+    });
+
+    console.log("Nearby markers found:", nearbyMarkers);
+
+    // Map through nearbyMarkers and fetch the relevant posts
+    nearbyMarkers.forEach((nearbyMarkerId) => {
+        const post = APIdata.find(newsItem => newsItem.id === nearbyMarkerId);
+        if (post) {
+            nearbyPosts.push(post); // Add the post to nearbyPosts
+        }
+    });
+
+    console.log("Nearby posts:", nearbyPosts);
+
+    // Render the posts after the arrays are updated
+    renderPosts();
 }
 
-// Function to inject the generated HTML into a specific container (for example, a div with id 'posts-container')
+// Function to render the posts
 async function renderPosts() {
     const postsContainer = document.getElementById('posts-container');
 
     if (postsContainer) {
-        console.log(147, nearbyPosts);
+        console.log("Rendering posts:", nearbyPosts);
 
-        // If no nearby posts found, show a message
         if (nearbyPosts.length === 0) {
             postsContainer.innerHTML = '<p>No nearby posts found.</p>';
             return;
         }
 
-        let html = '<div id="posts-list">';
+        let html = '<div id="posts-list" class="news-container">';
 
         nearbyPosts.forEach(function (newsItem) {
-            console.log(67, newsItem);
+            console.log("Rendering post:", newsItem);
             html += `
-            <div class="post" id="post-${newsItem.id}">
-                <h3 class="post-title">${newsItem.title}</h3>
-                <p class="post-content">${newsItem.content}</p>
-                <img src="${newsItem.imgSrc}" alt="${newsItem.title}" class="post-image" />
-            </div>
+            <article class="news-item" id="news-${newsItem.id}" data-id="${newsItem.id}">
+                <div class="ribbon ${newsItem.ribbonType}">
+                    ${newsItem.ribbonType}
+                </div>
+
+                <div class="news-top">
+                    <div class="profile-pic">
+                        <img src=${newsItem.imgSrc}> 
+                    </div>
+                    <span class="user-name">
+                        ${newsItem.author}
+                    </span>
+                    <span class="dot">•</span>
+                    <span class="time">
+                        ${newsItem.time}
+                    </span>
+                    <span class="dot">•</span>
+                    <span class="news-status">News popular near you</span>
+                </div>
+
+                <div class="news-image">
+                    <img src=${newsItem.newsImgSrc} %>>
+                </div>
+
+                <div class="news-content">
+                    <h3>
+                        ${newsItem.title}
+                    </h3>
+                    <p>
+                        ${newsItem.content}
+                    </p>
+                </div>
+
+            </article>
             `;
         });
 
-        // End the HTML container for posts
-        html += '</div>';
+        html += '</div>'; // End posts list
 
         postsContainer.innerHTML = html;
     } else {
@@ -108,13 +126,24 @@ async function renderPosts() {
     }
 }
 
-// Use map.locate to get the user's current position
-map.locate({
-    setView: true, // Automatically center the map on the user's location
-    maxZoom: 16, // Set the zoom level when user's location is found
-    watch: true, // Optionally watch the user's location for continuous updates
-    enableHighAccuracy: true, // Enable high accuracy if available
-});
+// Initialize the map
+const map = L.map("map").setView([51.505, -0.09], 13); // Default to London
+
+// Add OpenStreetMap tiles to the map
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+const markersClusterGroup = L.markerClusterGroup();
+const distanceThreshold = 1000; // 1000 meters = 1 km
+let leafletMarkers = [];
+let APIdata = [];
+let nearbyMarkers = [];
+let nearbyPosts = [];
+
+// Load the markers on page load
+loadMarkersFromAPI();
 
 // When location is found, call the detectNearbyMarkers function
 map.on("locationfound", function (event) {
@@ -129,7 +158,7 @@ map.on("locationfound", function (event) {
         radius: distanceThreshold
     }).addTo(map);
 
-    // Detect nearby markers based on the user's current location
+    // Detect nearby markers based on the user's location
     detectNearbyMarkers(event);
 });
 
@@ -137,9 +166,3 @@ map.on("locationfound", function (event) {
 map.on("locationerror", function (event) {
     alert("Unable to retrieve your location. Error: " + event.message);
 });
-
-// Load the markers from the API
-loadMarkersFromAPI();
-
-// Call the renderPosts function to inject the generated HTML into the page
-renderPosts();
