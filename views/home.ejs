@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REAL. - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Example link -->
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Example link -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
     <header>
         <h1 class="logo">Real
             <img src="/images/green_circle.png">
-        </h1> 
+        </h1>
         <a href="/settings">
-            <div ><img class="settings" src="/images/setting.png" alt=""></div>
+            <div><img class="settings" src="/images/setting.png" alt=""></div>
         </a>
     </header>
 
@@ -29,8 +29,57 @@
         </div>
     </div>
     <main>
+        <h1 class="hello">Hello John!</h1>
+        <h1 class="location">Your current location</h1>
+        <h1 class="address"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
+        <!--This is the section for add news form-->
+        <button class="add-news-button" onclick="openForm()">+ Add News</button>
+        <!-- Form Modal -->
+        <div id="newsFormModal" class="modal">
+            <div class="modal-content">
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    <label for="heading">Heading:</label>
+                    <input type="text" id="heading" name="heading" required><br><br>
+
+                    <label for="author">Location:</label>
+                    <input type="text" id="author" name="author" required><br><br>
+
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" required></textarea><br><br>
+
+                    <label for="thumbnail">Thumbnail Image:</label>
+                    <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required><br><br>
+
+                    <!-- Hidden input to store coordinates -->
+                    <input type="hidden" id="coordinates" name="coordinates">
+
+                    <button type="submit">Submit Post</button>
+                </form>
+            </div>
+        </div>
+        
         <div id="map" style="display: none"></div>
 
+        <h1 class="trending-title">Trending updates in your area</h1>
+        <div class="scroll-container"> <!-- Scrollable container -->
+            <% for(let i=1; i <=6; i++) { %>
+                <article class="news-card"> <!-- Individual card -->
+                    <div class="small-images">
+                        <img src="/images/koala.jpg">
+                    </div>
+                    <div class="ribbon <%= i === 1 ? 'verified' : i === 2 ? 'unverified' : 'fake' %>">
+                        <%= i===1 ? 'Verified' : i===2 ? 'Unverified' : 'Fake' %>
+                    </div>
+                    <div class="news-content">
+                        <h3 class="heading">Lorem Ipsum Dolor Sit Amet <%= i %>
+                        </h3>
+                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h1 class="address-small"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000
+                        </h1>
+                    </div>
+                </article>
+                <% } %>
+        </div>
         <h1 class="feed-title">News feed</h1>
         <div class="news-container">
             <% newsList.forEach(function(newsItem) { %>
@@ -40,7 +89,7 @@
                     </div>
                     <div class="news-top">
                         <div class="profile-pic">
-                            <img src=<%=newsItem.imgSrc %>> 
+                            <img src=<%=newsItem.imgSrc %>>
                         </div>
                         <span class="user-name">
                             <%= newsItem.author %>
@@ -53,7 +102,7 @@
                         <span class="news-status">News popular near you</span>
                     </div>
                     <div class="news-image">
-                        <img src=<%= newsItem.newsImgSrc %>>
+                        <img src=<%=newsItem.newsImgSrc %>>
                     </div>
                     <div class="news-content">
                         <h3>
@@ -66,11 +115,15 @@
                     <div class="news-actions">
                         <button class="likes-btn">
                             <img src="images/like.png" alt="20">
-                            <span><%= newsItem.likes %>Likes</span>
+                            <span>
+                                <%= newsItem.likes %>Likes
+                            </span>
                         </button>
                         <button class="comment-btn">
                             <img src="images/comment.png" alt="Comment">
-                            <span><%= newsItem.commentsCount %>300</span>
+                            <span>
+                                <%= newsItem.commentsCount %>300
+                            </span>
                         </button>
                         <button class="share-btn">
                             <img src="images/share-b.png" alt="Share">
@@ -83,10 +136,11 @@
         </div>
     </main>
 
-
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
+
     <script>
+
         // Initialize the Leaflet map
         var map = L.map('map').setView([0, 0], 13); // Set default position (latitude, longitude) and zoom level
 
@@ -118,21 +172,7 @@
         map.on("locationerror", function (e) {
             alert("Unable to retrieve your location.");
         });
-    </script>
 
-
-
-    <script>
-        // Add click event listener to each news item
-        document.querySelectorAll('.news-item').forEach(function (newsItem) {
-            newsItem.addEventListener('click', function () {
-                const newsId = this.getAttribute('data-id');  // Get the news item ID
-                window.location.href = `/post/${newsId}`;     // Redirect to the news post page
-            });
-        });
-    </script>
-
-    <script>
         // Open the form modal
         function openForm() {
             console.log("Opening form");
@@ -152,6 +192,14 @@
                 modal.style.display = "none";
             }
         }
+
+        // Add click event listener to each news item
+        document.querySelectorAll('.news-item').forEach(function (newsItem) {
+            newsItem.addEventListener('click', function () {
+                const newsId = this.getAttribute('data-id');  // Get the news item ID
+                window.location.href = `/post/${newsId}`;     // Redirect to the news post page
+            });
+        });
     </script>
 
     <nav class="bottom-nav">
@@ -168,12 +216,14 @@
             <span>Map</span>
         </a>
     </nav>
+    </nav>
     <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 Real. All rights reserved.</p>
             <p>Team: Curry Powder</p>
         </div>
     </footer>
-<!-- <script src="script.js"></script> -->
+    <!-- <script src="script.js"></script> -->
 </body>
+
 </html>
