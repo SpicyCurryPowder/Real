@@ -48,6 +48,10 @@ async function loadMarkersFromAPI() {
 async function detectNearbyMarkers(event) {
     const userLatLng = event.latlng; // Use event.latlng to get the user's location
 
+    // Reset the nearbyMarkers and nearbyPosts arrays
+    nearbyMarkers = [];
+    nearbyPosts = [];
+
     // Loop through the markers and check distance from the user's location
     if (nearbyMarkers.length == 0) {  // if nearbyMarkers list is empty
         leafletMarkers.forEach(function (markerData) {
@@ -76,14 +80,21 @@ async function renderPosts() {
     if (postsContainer) {
         console.log(147, nearbyPosts);
 
+        // If no nearby posts found, show a message
+        if (nearbyPosts.length === 0) {
+            postsContainer.innerHTML = '<p>No nearby posts found.</p>';
+            return;
+        }
+
         let html = '<div id="posts-list">';
 
         nearbyPosts.forEach(function (newsItem) {
-            console.log(67, newsItem)
+            console.log(67, newsItem);
             html += `
             <div class="post" id="post-${newsItem.id}">
                 <h3 class="post-title">${newsItem.title}</h3>
                 <p class="post-content">${newsItem.content}</p>
+                <img src="${newsItem.imgSrc}" alt="${newsItem.title}" class="post-image" />
             </div>
             `;
         });
@@ -96,7 +107,6 @@ async function renderPosts() {
         console.error('The container with id "posts-container" does not exist.');
     }
 }
-
 
 // Use map.locate to get the user's current position
 map.locate({
@@ -133,6 +143,3 @@ loadMarkersFromAPI();
 
 // Call the renderPosts function to inject the generated HTML into the page
 renderPosts();
-
-
-
