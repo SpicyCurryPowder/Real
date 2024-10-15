@@ -34,61 +34,20 @@
         <!-- Form Modal -->
         <div id="newsFormModal" class="modal">
             <div class="modal-content">
-                <span class="close" onclick="closeForm()">&times;</span>
-                <form>
-                    <h2>New Post</h2>
-                    <!-- Enable Live Location -->
-                    <label>
-                        <input type="checkbox" name="enableLiveLocation" id="enableLiveLocation"> Enable Live Location
-                    </label><br>
+                <form action="/" method="POST" enctype="multipart/form-data">
+                    <label for="heading">Heading:</label>
+                    <input type="text" id="heading" name="heading" required><br><br>
 
-                    <!-- Main Heading -->
-                    <label for="mainHeading">Main Heading:</label>
-                    <input type="text" name="mainHeading" id="mainHeading" required><br>
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" required><br><br>
 
-                    <!-- Add Location -->
-                    <label for="location">Add Location:</label>
-                    <input type="text" name="location" id="location"><br>
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" required></textarea><br><br>
 
-                    <!-- Add Image -->
-                    <label for="image">Add Image:</label>
-                    <input type="file" name="image" id="image"><br>
+                    <label for="thumbnail">Thumbnail Image:</label>
+                    <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required><br><br>
 
-                    <!-- Thumbnail Image -->
-                    <label for="thumbnailImage">Thumbnail Image:</label>
-                    <input type="file" name="thumbnailImage" id="thumbnailImage"><br>
-
-                    <!-- Report Section -->
-                    <label for="report">Report:</label>
-                    <textarea name="report" id="report" rows="4"></textarea><br>
-
-                    <!-- Sources Section -->
-                    <fieldset>
-                        <legend>Sources</legend>
-                        
-                        <!-- Add Multiple Images -->
-                        <label for="additionalImages">Additional Images:</label>
-                        <input type="file" name="additionalImages" id="additionalImages" multiple><br>
-
-                        <!-- Add Report -->
-                        <label for="additionalReport">Additional Report:</label>
-                        <input type="file" name="additionalReport" id="additionalReport"><br>
-
-                        <!-- Add Links (Optional) -->
-                        <label for="links">Add Links (Optional):</label>
-                        <input type="url" name="links" id="links"><br>
-
-                        <!-- Add Video (Optional) -->
-                        <label for="video">Add Video (Optional):</label>
-                        <input type="file" name="video" id="video" accept="video/*"><br>
-
-                        <!-- Citation -->
-                        <label for="citation">Citation:</label>
-                        <textarea name="citation" id="citation" rows="2"></textarea>
-                    </fieldset>
-
-                    <!-- Submit Button -->
-                    <button type="submit">Submit</button>
+                    <button type="submit">Submit Post</button>
                 </form>
             </div>
         </div>
@@ -136,7 +95,7 @@
             <% newsList.forEach(function(newsItem) { %>
                 <article class="news-item" id="news-<%= newsItem.id %>" data-id="<%= newsItem.id %>">
                     <div class="ribbon <%= newsItem.ribbonType %>">
-                        <%= newsItem.ribbonType.charAt(0).toUpperCase() + newsItem.ribbonType.slice(1) %>
+                        <%= newsItem.ribbonType %>
                     </div>
                     <div class="news-top">
                         <div class="profile-pic">
@@ -215,6 +174,6 @@
         <p>Team: Curry Powder</p>
     </div>
 </footer>
-<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->
 </body>
 </html>

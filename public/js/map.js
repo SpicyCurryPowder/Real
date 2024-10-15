@@ -5,22 +5,23 @@ async function loadMarkersFromAPI() {
         .then((data) => {
             data.forEach(function (markerData) {
                 const { id, author, time, imgSrc, newsImgSrc, ribbonType, title, content, coordinates } = markerData;
-                const marker = L.marker([coordinates[0], coordinates[1]])
-                    .bindPopup(`<b>${id}, ${title}</b>`);
+                if (coordinates) {
+                    const marker = L.marker([coordinates[0], coordinates[1]])
+                        .bindPopup(`<b>${ribbonType.toUpperCase()}: ${title}</b>`);
 
-                markersClusterGroup.addLayer(marker);
+                    markersClusterGroup.addLayer(marker);
 
-                // Store the marker data
-                leafletMarkers.push({
-                    id: id,
-                    lat: coordinates[0],
-                    lng: coordinates[1],
-                    marker: marker,
-                });
-
-                APIdata.push(markerData);
+                    // Store the marker data
+                    leafletMarkers.push({
+                        id: id,
+                        lat: coordinates[0],
+                        lng: coordinates[1],
+                        marker: marker,
+                    });
+                    APIdata.push(markerData);
+                }
             });
-
+            
             map.addLayer(markersClusterGroup);
             console.log("Loaded markers:", APIdata);
 

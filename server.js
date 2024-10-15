@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const path = require('path');
+const multer = require("multer");
+const bodyParser = require("body-parser");
+const fs = require('fs');  // Import fs for file system operations
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,21 +16,95 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set up body parser to handle POST form data (for text fields)
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Set up Multer storage configuration for image uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Define the folder to store images
+    },
+    filename: (req, file, cb) => {
+        // Use original filename or generate a unique one
+        cb(null, Date.now() + path.extname(file.originalname)); // Add timestamp to avoid name conflicts
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
 // In-memory storage for liked news (replace with a database in a real application)
 let likedNews = [];
-const newsList = require('./data.json');
+const dataFilePath = path.join(__dirname, 'data.json');
+const dataJSON = require('./data.json');
 
 // Home page route (web-scraped news)
 app.get('/', async (req, res) => {
     try {
         const scrapedNews = await scrapeNews();
+        const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));  // Read the news from data.json
         res.render('home', { newsList });
     } catch (error) {
         console.error('Error fetching scraped news: check line 25 of server.js');
-        // console.error('Error fetching scraped news:', error);
         res.status(500).send('Error fetching news');
     }
 });
+
+// POST route to handle form submission (including file upload)
+app.post('/', upload.single('thumbnail'), (req, res) => {
+    const { heading, location, content } = req.body;
+    const thumbnail = req.file;
+
+    // Check if all required fields are provided
+    if (!heading || !location || !content || !thumbnail) {
+        return res.render('home', {
+            errorMessage: 'All fields (heading, location, content, and thumbnail) are required.'
+        });
+    }
+
+    // Read the current data from data.json
+    const newsList = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+
+    // Calculate the next available ID by finding the highest ID and incrementing it
+    const highestId = Math.max(...newsList.map(post => post.id), 0);
+    const newPostId = highestId + 1;
+
+    // Create a new post object
+    const newPost = {
+        id: newPostId,
+        author: 'Unknown Author',  // You can customize this to get the author from the form
+        time: 'Just Now',  // You can set this based on the submission time or get it from the form
+        imgSrc: 'images/profile-unknown.jpg',  // You can allow users to upload an avatar image or set a default
+        newsImgSrc: `/uploads/${thumbnail.filename}`,  // Path to the uploaded thumbnail image
+        ribbonType: 'unverified',  // Default or based on user input
+        title: heading,
+        content: content,
+        coordinates: []  // You can allow users to enter coordinates or fetch them based on location
+    };
+
+    // Add the new post to the beginning of the list (at index 0)
+    newsList.unshift(newPost);
+
+    // Sort the newsList by id in descending order (largest to smallest)
+    const sortedNewsList = newsList.sort((a, b) => b.id - a.id);
+
+
+    // Write the updated news list back to data.json
+    fs.writeFileSync(dataFilePath, JSON.stringify(newsList, null, 2), 'utf8');
+
+    // Redirect to the homepage with a success message
+    res.render('home', {
+        newsList,
+        successMessage: 'Post submitted successfully!',
+        errorMessage: null  // Clear any error messages
+    });
+});
+
+
+// Serve the uploaded image files as static
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 app.get('/newspage-unverified', (req, res) => {
     res.render('newspage-unverified', { article: req.query });
@@ -42,15 +119,15 @@ app.get('/source-news', (req, res) => {
 });
 
 app.get('/verified-news', (req, res) => {
-    res.render('verified-news', { newsList });
+    res.render('verified-news', { dataJSON });
 });
 
 app.get('/map', (req, res) => {
-    res.render('map', { newsList });
+    res.render('map', { dataJSON });
 });
 
 app.get('/settings', (req, res) => {
-    res.render('settings', { newsList });
+    res.render('settings', { dataJSON });
 });
 
 
@@ -58,7 +135,7 @@ app.get('/settings', (req, res) => {
 app.get('/post/:id', (req, res) => {
     const postId = parseInt(req.params.id);
     // console.log(postId);
-    const post = newsList.find(p => p.id === postId);
+    const post = dataJSON.find(p => p.id === postId);
 
     if (!post) {
         return res.status(404).send('Post not found');
@@ -68,7 +145,7 @@ app.get('/post/:id', (req, res) => {
 });
 
 app.get('/locations', (req, res) => {
-    res.json(newsList);
+    res.json(dataJSON);
 });
 
 // Serve data.json file via an API endpoint
