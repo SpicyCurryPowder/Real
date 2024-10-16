@@ -29,10 +29,6 @@
         </div>
     </div>
     <main>
-        <h1 class="hello">Hello John!</h1>
-        <h1 class="location">Your current location</h1>
-        <h1 class="address"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000</h1>
-        <!--This is the section for add news form-->
         <button class="add-news-button" onclick="openForm()">+ Add News</button>
         <!-- Form Modal -->
         <div id="newsFormModal" class="modal">
@@ -60,26 +56,6 @@
         
         <div id="map" style="display: none"></div>
 
-        <h1 class="trending-title">Trending updates in your area</h1>
-        <div class="scroll-container"> <!-- Scrollable container -->
-            <% for(let i=1; i <=6; i++) { %>
-                <article class="news-card"> <!-- Individual card -->
-                    <div class="small-images">
-                        <img src="/images/koala.jpg">
-                    </div>
-                    <div class="ribbon <%= i === 1 ? 'verified' : i === 2 ? 'unverified' : 'fake' %>">
-                        <%= i===1 ? 'Verified' : i===2 ? 'Unverified' : 'Fake' %>
-                    </div>
-                    <div class="news-content">
-                        <h3 class="heading">Lorem Ipsum Dolor Sit Amet <%= i %>
-                        </h3>
-                        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <h1 class="address-small"><img src="/images/loc.png" alt="">Albert St Brisbane City, QLD 4000
-                        </h1>
-                    </div>
-                </article>
-                <% } %>
-        </div>
         <h1 class="feed-title">News feed</h1>
         <div class="news-container">
             <% newsList.forEach(function(newsItem) { %>

@@ -11,7 +11,9 @@
 <body>
     <header>
         <div class="line">
-            <img src="/images/Line.png">
+            <a href="/">
+                <img src="/images/Line.png">
+             </a>
         </div>
         <div class="filter">
             <img src="/images/filter.png">
@@ -54,9 +56,9 @@
             <% newsList.forEach(function(newsItem) { %>
                 <% if (newsItem.ribbonType == 'verified') { %>
 
-                <article class="news-item" id=<%=newsItem.id %>>
+                <article class="news-item" id="news-<%= newsItem.id %>" data-id="<%= newsItem.id %>">
                     <div class="ribbon <%= newsItem.ribbonType %>">
-                        <%= newsItem.ribbonType.charAt(0).toUpperCase() + newsItem.ribbonType.slice(1) %>
+                        <%= newsItem.ribbonType %>
                     </div>
                     <div class="news-top">
                         <div class="profile-pic">
@@ -106,6 +108,16 @@
                 </article>
                 <% } }); %>
         </div>
+
+        <script>
+            // Add click event listener to each news item
+            document.querySelectorAll('.news-item').forEach(function (newsItem) {
+                newsItem.addEventListener('click', function () {
+                    const newsId = this.getAttribute('data-id');  // Get the news item ID
+                    window.location.href = `/post/${newsId}`;     // Redirect to the news post page
+                });
+            });
+        </script>
     </main>
 
     <nav class="bottom-nav">

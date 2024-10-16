@@ -77,6 +77,10 @@ main {
 
 }
 
+.image-tile-container {
+    margin-top: 2rem;
+}
+
 
 .tiles-container {
     display: flex;
